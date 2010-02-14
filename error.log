@@ -1,0 +1,5 @@
+
+
+Tue 2 02 2008; 23:54:04 FROM IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, term, nb_comp) VALUES ('', 'fae', '31', '10', '1', '1')
+Erro : Unknown column 'term' in 'field list'

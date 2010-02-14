@@ -1,0 +1,24 @@
+         ############################################
+         #                                          #
+         #       Gnote alpha-1 by MikaYuoadas       #
+         #   see COPYING for license informations   #
+         #                                          #
+         ############################################
+
+
+Gnote was developed in 2008 on an original idea of Jtraulle
+
+
+Installation and Configuration :
+
+Copy all files composing Gnote in /var/www/ repertories of your
+server.
+Before Launching the installation.php script you need to
+configure some options in configs.php file.
+Configuration is Explained in configs.php, When configured,
+Install Gnote by visiting www.yourdomaine.tld/installation.php .
+Now the database is set to default and the software Gnote is
+ready to use.
+
+Notice : We do not give support for the apache, php and mysql
+installation and configuration, please read the appropriate manuel.

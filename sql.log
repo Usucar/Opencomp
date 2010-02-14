@@ -1,0 +1,196 @@
+Sun 23 23 2008; 18:57:08  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'aztge', '32', '6', '2')
+Sun 23 23 2008; 18:57:09  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='32'
+Sun 23 23 2008; 18:57:15  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_eval, text) VALUES ('', '22', 'fagaerghaeg')
+Sun 23 23 2008; 18:57:15  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_eval, text) VALUES ('', '22', 'zfaazfg')
+Sun 23 23 2008; 20:26:52  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'oheo', '31', '3', '3')
+Sun 23 23 2008; 20:26:52  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:30:19  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'zeft', '31', '3', '3')
+Sun 23 23 2008; 20:30:19  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:32:16  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'fre', '31', '3', '3')
+Sun 23 23 2008; 20:32:16  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:33:12  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'rfzeg', '31', '3', '3')
+Sun 23 23 2008; 20:33:12  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:34:17  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'azgrae', '31', '3', '3')
+Sun 23 23 2008; 20:34:17  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:35:27  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'ezax', '31', '3', '3')
+Sun 23 23 2008; 20:35:27  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:40:02  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'thrth', '31', '10', '3')
+Sun 23 23 2008; 20:40:02  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:41:38  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', '\\&quot;rgazrryeh', '32', '2', '3')
+Sun 23 23 2008; 20:41:38  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='32'
+Sun 23 23 2008; 20:43:11  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'egzrze', '31', '10', '2')
+Sun 23 23 2008; 20:43:11  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:47:48  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'zefa', '31', '10', '2')
+Sun 23 23 2008; 20:47:48  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:49:45  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'azdfr', '31', '10', '2')
+Sun 23 23 2008; 20:49:45  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:50:14  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'fzea', '31', '10', '2')
+Sun 23 23 2008; 20:50:14  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:50:51  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'gzeazer', '31', '10', '2')
+Sun 23 23 2008; 20:50:51  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:51:45  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'grez', '31', '10', '3')
+Sun 23 23 2008; 20:51:45  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:52:35  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'rze', '31', '10', '4')
+Sun 23 23 2008; 20:52:35  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:53:35  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'efzagrt', '31', '10', '3')
+Sun 23 23 2008; 20:53:35  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 20:55:21  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'r\\\'&eacute;\\&quot;', '31', '10', '3')
+Sun 23 23 2008; 20:55:21  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sun 23 23 2008; 22:03:59  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', '', '', '', '')
+Sun 23 23 2008; 22:03:59  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id=''
+Sun 23 23 2008; 22:18:44  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'azefazef', '31', '10', '20')
+Sun 23 23 2008; 22:18:44  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='31'
+Sat 29 29 2008; 17:04:11  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'grzagerzg', '32', '1', '3')
+Sat 29 29 2008; 17:04:11  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='32'
+Sat 29 29 2008; 17:04:54  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, nb_comp) VALUES ('', 'tikt34utr', '32', '1', '3')
+Sat 29 29 2008; 17:04:54  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='32'
+Sun 30 30 2008; 15:54:56  FROM  IP: 127.0.0.1
+SQL : DELETE FROM gn_sous_matieres WHERE id='4'
+Mon 1 01 2008; 22:48:23  FROM  IP: 127.0.0.1
+SQL : DELETE FROM gn_eleves_rgzrta WHERE id='1'
+Mon 1 01 2008; 22:48:23  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_eleves='0' WHERE name='rgzrta'
+Tue 2 02 2008; 23:45:39  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_sous_matiere, text) VALUES ('', '6', 'frgze')
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_classes (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, level VARCHAR (3) not null, nb_eleves INT not null, nb_evaluations INT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_elevessansclasse (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, surname VARCHAR (255) not null, sex INT not null, birth BIGINT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_matieres (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_sous_matieres (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, id_parent INT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_evaluations (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, id_class INT not null, id_matiere INT not null, term INT not null, nb_comp INT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eval_result (id INT not null AUTO_INCREMENT, id_eval INT not null, name VARCHAR (255) not null, surname VARCHAR (255) not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eval_comp_link (id INT not null AUTO_INCREMENT, id_eval INT not null, id_comp INT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eval_comp (id INT not null AUTO_INCREMENT, id_sous_matiere INT not null, text BLOB not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:51:05  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eval_comp_result (id INT not null AUTO_INCREMENT, id_result INT not null, id_comp INT not null, value CHAR (1) not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_classes (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, level VARCHAR (3) not null, nb_eleves INT not null, nb_evaluations INT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_elevessansclasse (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, surname VARCHAR (255) not null, sex INT not null, birth BIGINT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_matieres (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_sous_matieres (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, id_parent INT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_evaluations (id INT not null AUTO_INCREMENT, name VARCHAR (255) not null, id_class INT not null, id_matiere INT not null, term INT not null, nb_comp INT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eval_result (id INT not null AUTO_INCREMENT, id_eval INT not null, name VARCHAR (255) not null, surname VARCHAR (255) not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eval_comp_link (id INT not null AUTO_INCREMENT, id_eval INT not null, id_comp INT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eval_comp (id INT not null AUTO_INCREMENT, id_sous_matiere INT not null, text BLOB not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:01  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eval_comp_result (id INT not null AUTO_INCREMENT, id_result INT not null, id_comp INT not null, value CHAR (1) not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:55  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_classes(id, name, level, nb_eleves, nb_evaluations) VALUES('', 'adfe','CE2', '0', '0')
+Tue 2 02 2008; 23:55:55  FROM  IP: 127.0.0.1
+SQL : CREATE TABLE IF NOT EXISTS gn_eleves_adfe(id INT not null AUTO_INCREMENT, name VARCHAR (50) not null, surname VARCHAR (50) not null, sex INT not null, birth BIGINT not null, PRIMARY KEY (id))
+Tue 2 02 2008; 23:55:55  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eleves_adfe(id, name, surname, sex, birth) VALUES('', 'feaefa','aefaf', '1', '889052400')
+Tue 2 02 2008; 23:55:55  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eleves_adfe(id, name, surname, sex, birth) VALUES('', 'afaef','aefaef', '0', '668559600')
+Tue 2 02 2008; 23:55:55  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_eleves='2' WHERE name='adfe'
+Tue 2 02 2008; 23:56:08  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_matieres(id, name) VALUES ('', 'eafea')
+Tue 2 02 2008; 23:56:08  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_sous_matieres(id, name,id_parent) VALUES ('', 'grtrz', '1')
+Tue 2 02 2008; 23:56:25  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_sous_matiere, text) VALUES ('', '1', 'bonjour')
+Tue 2 02 2008; 23:56:50  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, term, nb_comp) VALUES ('', 'fea', '1', '1', '2', '1')
+Tue 2 02 2008; 23:56:50  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='1'
+Tue 2 02 2008; 23:58:20  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, term, nb_comp) VALUES ('', 'feaza', '1', '1', '3', '1')
+Tue 2 02 2008; 23:58:20  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='1'
+Tue 2 02 2008; 23:58:23  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_sous_matiere, text) VALUES ('', '', 'feazgraz')
+Tue 2 02 2008; 23:58:23  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp_link(id, id_eval, id_comp) VALUES ('', '2', '')
+Wed 3 03 2008; 0:02:12  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, term, nb_comp) VALUES ('', 'feazfe', '1', '1', '2', '1')
+Wed 3 03 2008; 0:02:12  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='1'
+Wed 3 03 2008; 0:02:17  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, term, nb_comp) VALUES ('', 'dfgzg', '32', '6', '2', '2')
+Wed 3 03 2008; 0:02:17  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='32'
+Wed 3 03 2008; 0:02:28  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, term, nb_comp) VALUES ('', 'feazg', '1', '1', '1', '3')
+Wed 3 03 2008; 0:02:28  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='1'
+Wed 3 03 2008; 0:02:33  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_sous_matiere, text) VALUES ('', '', 'fez')
+Wed 3 03 2008; 0:02:51  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp_link(id, id_eval, id_comp) VALUES ('', '5', 'Array')
+Wed 3 03 2008; 0:02:51  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_sous_matiere, text) VALUES ('', '', 'grtehtr')
+Wed 3 03 2008; 0:02:51  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp_link(id, id_eval, id_comp) VALUES ('', '5', '')
+Wed 3 03 2008; 0:02:51  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_sous_matiere, text) VALUES ('', '', 'grzegrzhzf')
+Wed 3 03 2008; 0:02:51  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp_link(id, id_eval, id_comp) VALUES ('', '5', '')
+Wed 3 03 2008; 0:02:57  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_evaluations(id, name, id_class, id_matiere, term, nb_comp) VALUES ('', 'kuyli', '1', '1', '1', '2')
+Wed 3 03 2008; 0:02:57  FROM  IP: 127.0.0.1
+SQL : UPDATE gn_classes SET nb_evaluations='1' WHERE id='1'
+Wed 3 03 2008; 0:03:02  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp(id, id_sous_matiere, text) VALUES ('', '', 'htyrjyrzthe')
+Wed 3 03 2008; 0:03:02  FROM  IP: 127.0.0.1
+SQL : INSERT INTO gn_eval_comp_link(id, id_eval, id_comp) VALUES ('', '6', '')
