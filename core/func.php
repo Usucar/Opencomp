@@ -49,7 +49,7 @@ function db_query($sql)
 }
 
 
-function printHead($title, $auth, $param)
+function printHead($title, $auth, $param, $dbprefixe)
 {
 	$datefr = datefr();
 
@@ -84,7 +84,7 @@ function printHead($title, $auth, $param)
 			if ($_SESSION['derniere_connexion_echouee'] == 'oui')
 			{
 				$pseudo = $_SESSION['pseudo'];
-				mysql_query("UPDATE enseignant SET connectfail='non' WHERE identifiant='$pseudo'") or die(mysql_error());
+				mysql_query("UPDATE " . $dbprefixe ."enseignant SET connectfail='non' WHERE identifiant='$pseudo'") or die(mysql_error());
 				$_SESSION['derniere_connexion_echouee'] = 'non';
 
 				echo'<div id="attention" style="display:none;"><p style="font-size:130%; text-align:justify; margin-left:10px; margin-right:10px;">Il y a eu une ou plusieurs tentatives de connexions &eacute;chou&eacute;es 	&agrave; votre compte depuis votre d&eacute;rni&egrave;re visite. Si vous avez commis une erreur lors de la saisie de votre mot de passe, il n\'y a pas d\'inqui&eacute;tudes &agrave; avoir. Dans le cas contraire, nous vous sugg&eacute;rons de consulter le Journal des connexions de votre compte ...</p><p class="bottomform"><input type="button" value="Consulter le journal des connexions" onClick="window.location=\'moncompte.php\';"> <input type=\'button\' value=\'Fermer\' onclick=\'Modalbox.hide()\' /></p></div>

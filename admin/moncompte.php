@@ -21,9 +21,9 @@
  * ========================================================================
  */
 
-include("core/init.php");
+include("../core/init.php");
 
-printHead('Mon compte', 'auth', '');
+printHead('Mon compte', 'auth', '', $dbprefixe);
 
 			/********************************************************************
 			* On affiche les informations personnelles de la personne connectée *
@@ -72,7 +72,7 @@ printHead('Mon compte', 'auth', '');
 						$nouveauemail = mysql_real_escape_string($_POST['email']);
 						if (VerifierAdresseMail($nouveauemail))
 						{
-							db_query("UPDATE enseignant SET email='$nouveauemail' WHERE identifiant='$pseudo'") or die(mysql_error());
+							db_query("UPDATE " . $dbprefixe ."enseignant SET email='$nouveauemail' WHERE identifiant='$pseudo'") or die(mysql_error());
 							$_SESSION['email'] = $nouveauemail;
 							echo '<td><input type="text" name="email" id="email" size="30" value="' . $_SESSION['email'] . '" /></td>';
 						}
@@ -174,29 +174,29 @@ printHead('Mon compte', 'auth', '');
 				switch ($_POST['depuis'])
 				{
 					case 'dix dernières connexions':
-					$requete = db_query("SELECT * FROM log WHERE login='$pseudo' ORDER BY start DESC LIMIT 10");
+					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC LIMIT 10");
 					break;
 
 					case 'connexions depuis une semaine':
-					$requete = db_query("SELECT * FROM log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 7 ORDER BY start DESC");
+					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 7 ORDER BY start DESC");
 					break;
 
 					case 'connexions depuis quinze jours':
-					$requete = db_query("SELECT * FROM log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 15 ORDER BY start DESC");
+					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 15 ORDER BY start DESC");
 					break;
 
 					case 'connexions depuis un mois':
-					$requete = db_query("SELECT * FROM log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 31 ORDER BY start DESC");
+					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 31 ORDER BY start DESC");
 					break;
 
 					case 'connexions depuis le début':
-					$requete = db_query("SELECT * FROM log WHERE login='$pseudo' ORDER BY start DESC");
+					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC");
 					break;
 				}
 			}
 			else
 			{
-				$requete = db_query("SELECT * FROM log WHERE login='$pseudo' ORDER BY start DESC LIMIT 10"); // Requête SQL
+				$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC LIMIT 10"); // Requête SQL
 			}
 
 			//Pour afficher les logs d'aujourd'hui :

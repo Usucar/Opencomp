@@ -32,7 +32,8 @@
 	------------------------------------------------------------------
 	Written by Alexandre Alapetite, http://alexandre.alapetite.fr/cv/
 
-	Copyright 2005-2010, Licence: Creative Commons "Attribution-ShareAlike 2.0 France" BY-SA (FR),
+	Copyright 2005-2010,
+	This source code is release under the Creative Commons "Attribution-ShareAlike 2.0 France" BY-SA (FR) License,
 	http://creativecommons.org/licenses/by-sa/2.0/fr/
 	http://alexandre.alapetite.fr/divers/apropos/#by-sa
 	- Attribution. You must give the original author credit

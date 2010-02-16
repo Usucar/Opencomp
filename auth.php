@@ -37,7 +37,7 @@ if (isset($_SESSION['pseudo']))
 		$date_de_deconnexion = date('Y-m-d H:i:s');
 		$sessid = session_id();
 
-		mysql_query("UPDATE log SET end='$date_de_deconnexion', termine='oui' WHERE session_id='$sessid'") or die(mysql_error());
+		mysql_query("UPDATE " . $dbprefixe ."log SET end='$date_de_deconnexion', termine='oui' WHERE session_id='$sessid'") or die(mysql_error());
 
 		session_destroy();
 		unset($_SESSION);
@@ -85,12 +85,12 @@ if (isset($_SESSION['pseudo']))
 		//Si c'est l'admin, alors, on le redirige vers le dashboard-admin.php
 		if ($_SESSION['pseudo'] == 'admin')
 		{
-			header('Refresh: 0; url=admin/dashboard.php');
+			header('Location: admin/dashboard.php');
 		}
 		//SINON, c'est forcément un enseignant, on le redirige alors vers le dashboard-enseignant.php
 		else
 		{
-			header('Refresh: 0; url=enseignant/dashboard.php');
+			header('Location: enseignant/dashboard.php');
 		}
 	}
 }
@@ -105,11 +105,11 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 	*   On définit la fonction verification()   *
 	********************************************/
 
-	function verification($pseudo,$motdepasse)
+	function verification($pseudo,$motdepasse,$dbprefixe)
 	{
 		//Exécution de la requête
-		mysql_query("SET NAMES UTF8");
-		$sql = mysql_query ("SELECT * FROM enseignant WHERE identifiant='$pseudo'");
+		//mysql_query("SET NAMES UTF8");
+		$sql = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo'");
 		$tableau = mysql_fetch_array ($sql);
 
 		//On définit la fonction get_ip() qui permet d'obtenir l'adresse ip de l'internaute
@@ -135,7 +135,9 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 
 		if ( mysql_affected_rows()=='1') // Si le pseudo saisi existe, on passe à la suite
 		{
-			$sql2 = mysql_query ("SELECT * FROM enseignant WHERE identifiant='$pseudo' AND mot_de_passe='$motdepasse'");
+			$motdepasse = sha1($motdepasse.$tableau['salt']);
+
+			$sql2 = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo' AND mot_de_passe='$motdepasse'");
 			$tableau2 = mysql_fetch_array ($sql2);
 
 			if ( mysql_affected_rows()=='1') //Si le mot de passe est correct
@@ -150,18 +152,18 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 
 				//On marque la dernière connexion de l'utilisateur comme terminée
 				//(dans le cas où la personne ne s'est pas déconnecté manuellement)
-				mysql_query("UPDATE log SET termine='oui' WHERE login='$pseudo' AND termine='non'") or die(mysql_error());
+				mysql_query("UPDATE " . $dbprefixe ."log SET termine='oui' WHERE login='$pseudo' AND termine='non'") or die(mysql_error());
 
 				//On inscrit la connexion dans le journal
 				$sessid = session_id();
 
-				mysql_query("INSERT INTO log VALUES('', '$pseudo', '$datedeconnexion', '$sessid', '$ip', '$navigateur', '$hote', 'non', 'non', '')") or die(mysql_error());
-				return TRUE;
+				mysql_query("INSERT INTO " . $dbprefixe . "log VALUES('', '$pseudo', '$datedeconnexion', '$sessid', '$ip', '$navigateur', '$hote', 'non', 'non', '')") or die(mysql_error());
+
 			}
 			else //Sinon, l'identifiant est correct mais pas le mot de passe, on log donc cela dans la BDD
 			{
-				mysql_query("INSERT INTO log VALUES('', '$pseudo', '$datedeconnexion', 'nosess', '$ip', '$navigateur', '$hote', 'oui', 'oui', '')") or die(mysql_error());
-				mysql_query("UPDATE enseignant SET connectfail='oui' WHERE identifiant='$pseudo'") or die(mysql_error());
+				mysql_query("INSERT INTO " . $dbprefixe ."log VALUES('', '$pseudo', '$datedeconnexion', 'nosess', '$ip', '$navigateur', '$hote', 'oui', 'oui', '')") or die(mysql_error());
+				mysql_query("UPDATE " . $dbprefixe ."enseignant SET connectfail='oui' WHERE identifiant='$pseudo'") or die(mysql_error());
 				return FALSE;
 			}
 		}
@@ -180,16 +182,16 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 	$motdepasse = mysql_real_escape_string($_POST['motdepasse']);
 
 	//Si le couple identifiant/mot de passe saisi est valide
-	if ( verification( $pseudo, $motdepasse ) )
+	if ( verification( $pseudo, $motdepasse, $dbprefixe ) )
 	{
 		//On redirige la personne vers le tableau de bord approprié (enseignant ou admin)
 		if ($_SESSION['pseudo'] == 'admin')
 		{
-			header('Refresh: 0; url=admin/dashboard.php?welcome-panel');
+			header('Location: admin/dashboard.php?welcome-panel');
 		}
 		else
 		{
-			header('Refresh: 0; url=enseignant/dashboard.php?welcome-panel');
+			header('Location: enseignant/dashboard.php?welcome-panel');
 		}
 	}
 	else	//Sinon, on averti l'utilisateur que le couple identifiant, mot de passe est erroné.

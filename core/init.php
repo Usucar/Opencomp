@@ -65,5 +65,6 @@ require_once("config.php");
 
 		</html>' ); // Connexion à MySQL
 @mysql_select_db($dbbase); // Sélection de la base
+mysql_set_charset('utf8'); //Définition de l'utf8 comme jeu de caractères
 
 ?>

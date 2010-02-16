@@ -27,7 +27,7 @@ if (isset ($_SESSION['pseudo']))
 {
 	if ($_SESSION['pseudo'] != 'admin')
 	{
-		printHead('Tableau de bord enseignant', 'auth', 'ifconnectfail');
+		printHead('Tableau de bord enseignant', 'auth', 'ifconnectfail', $dbprefixe);
 
 		/* LA SUITE DE LA PAGE ENSEIGNANT ICI */
 
