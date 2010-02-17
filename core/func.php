@@ -56,7 +56,7 @@ function printHead($title, $auth, $param, $dbprefixe)
 	echo'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 		<head>
-			<title>Gnote | ' . $title . '</title>
+			<title>Opencomp | ' . $title . '</title>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<link type="text/css" href="../style/style.css" rel="stylesheet" />
 			<link type="text/css" href="../style/modalbox.css" rel="stylesheet" />
@@ -100,7 +100,7 @@ function printHead($title, $auth, $param, $dbprefixe)
 		echo'<div id="wrap">
 		<div id="en_tete"><img class="logo_entete" src="../style/img/logo.png" alt="logo" />
 
-				<div class="titre_entete">Gnote</div>
+				<div class="titre_entete">Opencomp</div>
 				<div class="description_entete">Gestion de r&eacute;sultats scolaires par navigateur<span class ="description_entete" style="font-size:x-small">et bien plus encore !</span></div>
 
 				<div class="info-connect_entete">
@@ -109,7 +109,8 @@ function printHead($title, $auth, $param, $dbprefixe)
 				</div>
 
 			</div>
-			<div id="corps" class="clearfix">';
+			<div id="corps" class="clearfix">
+			<noscript><ul style="margin:0px; padding:0px;"><li class="error">Javascript est indispensable au bon fonctionnement de Opencomp et doit être activé dans votre navigateur ! <span style="float:right;"><small>Comment faire ?</small></span></li></ul></noscript>';
 
 
 
@@ -125,7 +126,7 @@ function printFooter()
 	$tps_end = get_microtime();
 	$tps = round($tps_end - $tps_start, 4);
 
-	echo "<p style='position:relative; top:7px; left:10px;'>Gnote est distribué sous licence <a href ='http://www.april.org/gnu/gpl_french.html'>GNU/GPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'>Forge du projet Gnote</a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'>rapporter une anomalie</a></p><div style='float:right; position:relative; bottom:18px; right:10px;'>Page générée en $tps seconde";
+	echo "<p style='position:relative; top:7px; left:10px;'>Opencomp est distribué sous licence <a href ='http://www.april.org/gnu/gpl_french.html'>GNU/GPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'>Forge du projet Opencomp</a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'>rapporter une anomalie</a></p><div style='float:right; position:relative; bottom:18px; right:10px;'>Page générée en $tps seconde";
 
 		if (!isset ($GLOBALS['nb_requete']))
 		{

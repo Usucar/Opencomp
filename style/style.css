@@ -436,3 +436,21 @@ input[type=submit]:hover.ajouter,input[type=button]:hover.ajouter,input[type=res
 
 
 input[type=submit][disabled],input[type=button][disabled],input[type=reset][disabled]{background-color:#BE5A02 !important; color:#aaaaaa !important;font-weight:bold !important;border-style:outset !important;border-width:0px !important;-moz-border-radius: 15px; -webkit-border-radius: 15px;}
+
+.error
+{
+   color: red;
+   background-color: #FFE7E7;
+   border: 1px solid red;
+   margin-top: 10px;
+   padding: 5px;
+}
+
+li.error
+{
+   list-style-type: none;
+   background-image: url("img/cross.png");
+   background-repeat: no-repeat;
+   background-position: 1% 50%;
+   padding-left: 30px;
+}
