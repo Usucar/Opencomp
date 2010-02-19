@@ -21,25 +21,26 @@
  * ========================================================================
  */
 
+//Cette fonction permet d'obtenir le temps en millièmes de secondes
 function get_microtime()
 {
 	list($tps_usec, $tps_sec) = explode(" ",microtime());
 	return ((float)$tps_usec + (float)$tps_sec);
 }
 
+//On stocke dans une variable globale le temps au début du chargement de la page
 $GLOBALS['tps_start'] = get_microtime();
 
+//Cette fonction permet d'afficher la date au format français complet c-a-d par exemple Vendredi 13 Février 2009
 function datefr()
 {
 	$jour = array("Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi");
-
 	$mois = array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
-
 	$datefr = $jour[date("w")]." ".date("d")." ".$mois[date("n")]." ".date("Y");
-
 	return "Nous sommes le ". $datefr;
 }
 
+//Cette fonction permet de compter le nombre de requêtes mysql exécutées pour la page
 function db_query($sql)
 {
 	global $nb_requete;
@@ -48,7 +49,7 @@ function db_query($sql)
 
 }
 
-
+//Cette fonction permet d'afficher l'en-tête de la page.
 function printHead($title, $auth, $param, $dbprefixe)
 {
 	$datefr = datefr();
@@ -77,10 +78,13 @@ function printHead($title, $auth, $param, $dbprefixe)
 			}
 		}
 	}
+	//Si on a indiqué un paramètre
 	if (!empty($param))
 	{
+		//Et si ce paramètre est ifconnectfail
 		if($param = 'ifconnectfail')
 		{
+			//On vérifie si la dernière connexion a été échouée ; si c'est le cas, on averti l'utilisateur avec body onload
 			if ($_SESSION['derniere_connexion_echouee'] == 'oui')
 			{
 				$pseudo = $_SESSION['pseudo'];
@@ -91,12 +95,13 @@ function printHead($title, $auth, $param, $dbprefixe)
 				<body onLoad="Modalbox.show($(\'attention\'), {title: \'Attention !\', width: 500});">';
 			}
 		}
-
 	}
+	//Sinon, on affiche un body simple
 	else
 	{
 		echo'<body>';
 	}
+		//Puis on affiche l'en-tête
 		echo'<div id="wrap">
 		<div id="en_tete"><img class="logo_entete" src="../style/img/logo.png" alt="logo" />
 
@@ -111,23 +116,27 @@ function printHead($title, $auth, $param, $dbprefixe)
 			</div>
 			<div id="corps" class="clearfix">
 			<noscript><ul style="margin:0px; padding:0px;"><li class="error">Javascript est indispensable au bon fonctionnement de Opencomp et doit être activé dans votre navigateur ! <span style="float:right;"><small>Comment faire ?</small></span></li></ul></noscript>';
-
-
-
 }
 
+//Cette fonction permet d'inclure le pied de page.
 function printFooter()
 {
+	//On referme les balises précédemment ouvertes
 	echo'</div>
 	</div>
 	<div id="footer">';
 
+	//On récupère le temps de début de chargement
 	$tps_start = $GLOBALS['tps_start'];
+	//On obtient le temps de fin de chargement avec get_microtime();
 	$tps_end = get_microtime();
+	//On calcule le temps de génération de la page par soustraction ; on spécifie que l'on ne veut que 4 chiffres après la virgule.
 	$tps = round($tps_end - $tps_start, 4);
 
+	//On affiche le pied de page
 	echo "<p style='position:relative; top:7px; left:10px;'>Opencomp est distribué sous licence <a href ='http://www.april.org/gnu/gpl_french.html'>GNU/GPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'>Forge du projet Opencomp</a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'>rapporter une anomalie</a></p><div style='float:right; position:relative; bottom:18px; right:10px;'>Page générée en $tps seconde";
 
+		//Petite attention de langage sur le singulier/pluriel.
 		if (!isset ($GLOBALS['nb_requete']))
 		{
 			echo', aucune requête exécutée.</div>';
@@ -141,6 +150,7 @@ function printFooter()
 			echo ', ' . $GLOBALS['nb_requete'] . ' requêtes exécutées.</div>';
 		}
 
+	//On referme les balises précédemment ouvertes
 	echo'</div>
 	</body>
 	</html>';
