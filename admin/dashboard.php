@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /*
  * ========================================================================
@@ -23,25 +23,18 @@
 
 require_once("../core/init.php");
 
-if (isset ($_SESSION['pseudo']))
+if ($_SESSION['pseudo'] = 'admin')
 {
-	if ($_SESSION['pseudo'] = 'admin')
-	{
-		printHead('Tableau de bord administrateur', 'auth', 'ifconnectfail', $dbprefixe);
+	printHead('Tableau de bord administrateur', 'auth', 'ifconnectfail', $dbprefixe);
 
-		/* LA SUITE DE LA PAGE ADMIN ICI */
+	/* LA SUITE DE LA PAGE ADMIN ICI */
 
-		printFooter();
-	}
-	else
-	{
-		header('Refresh: 0; url=auth.php');
-		exit();
-	}
+	printFooter();
 }
 else
-	{
-		header('Refresh: 0; url=auth.php');
-		exit();
-	}
+{
+	header('Refresh: 0; url=auth.php');
+	exit();
+}
+
 ?>

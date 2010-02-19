@@ -33,6 +33,8 @@ require_once("config.php");
 
 @mysql_select_db($dbbase); // Sélection de la base
 
-mysql_set_charset('utf8'); //Définition de l'utf8 comme jeu de caractères
+//Uniquement à partir de PHP 5.2.3
+//mysql_set_charset('utf8');
+mysql_query("set names 'utf8';"); //Définition de l'utf8 comme jeu de caractères
 
 ?>

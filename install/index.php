@@ -335,11 +335,12 @@ echo'
 						else
 						{
 							// on crée nos variables
-							$hote = mysql_real_escape_string($_POST['hote']);
-							$login = mysql_real_escape_string($_POST['login']);
-							$mdp = mysql_real_escape_string($_POST['mdp']);
-							$base = mysql_real_escape_string($_POST['base']);
-							$prefixe = mysql_real_escape_string($_POST['prefixe']);
+							$caracteresasupprimer = array(" ");
+							$hote = str_replace($caracteresasupprimer, "", $_POST['hote']);
+							$login = str_replace($caracteresasupprimer, "", $_POST['login']);
+							$mdp = str_replace($caracteresasupprimer, "", $_POST['mdp']);
+							$base = str_replace($caracteresasupprimer, "", $_POST['base']);
+							$prefixe = str_replace($caracteresasupprimer, "", $_POST['prefixe']);
 
 							// si on arrive pas à se connecter à mysql, on affiche un message à l'utilisateur.
 							if(!@mysql_connect($hote, $login, $mdp))
@@ -612,7 +613,10 @@ elseif (isset($_GET['step5']))
 										$emailadmin = mysql_real_escape_string($_POST['emailadmin']);
 
 										//Pour pouvoir manipuler les accents sans problème, utf8
-										mysql_set_charset('utf8');
+										
+										//Uniquement à partir de PHP 5.2.3
+										//mysql_set_charset('utf8');
+										mysql_query("set names 'utf8';");
 
 										//On ajoute l'administrateur à la BDD
 										mysql_query("INSERT INTO ".$dbprefixe."enseignant (nom, prenom, identifiant, mot_de_passe, email, salt) VALUES ('$nomadmin', '$prenomadmin', 'admin', '$hashmotdepasse', '$emailadmin', '$graindesel');") or die(mysql_error());

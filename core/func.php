@@ -53,6 +53,18 @@ function db_query($sql)
 function printHead($title, $auth, $param, $dbprefixe)
 {
 	$datefr = datefr();
+	
+	/*if (isset($auth))
+	{
+		if($auth = 'auth')
+		{
+			if ( !isset( $_SESSION['pseudo'] ))
+			{
+				header('Refresh: 0; url=auth.php');
+				exit();
+			}
+		}
+	}*/
 
 	echo'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
@@ -67,17 +79,6 @@ function printHead($title, $auth, $param, $dbprefixe)
 			<script type="text/javascript" src="../library/js/modalbox.js"></script>
 		</head>' . "\n";
 
-	if (isset($auth))
-	{
-		if($auth = 'auth')
-		{
-			if ( !isset( $_SESSION['pseudo'] ))
-			{
-				header('Refresh: 0; url=auth.php');
-				exit();
-			}
-		}
-	}
 	//Si on a indiqué un paramètre
 	if (!empty($param))
 	{
