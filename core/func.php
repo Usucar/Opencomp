@@ -54,17 +54,42 @@ function printHead($title, $auth, $param, $dbprefixe)
 {
 	$datefr = datefr();
 	
-	/*if (isset($auth))
+	if (isset($auth))
 	{
-		if($auth = 'auth')
+		if($auth == 'admin')
 		{
-			if ( !isset( $_SESSION['pseudo'] ))
+			if ( isset( $_SESSION['pseudo'] ))
 			{
-				header('Refresh: 0; url=auth.php');
+				if ($_SESSION['pseudo'] != 'admin')
+				{
+					header('Location: ../auth.php');
+					exit();
+				}
+			}
+			else
+			{
+				header('Location: ../auth.php');
 				exit();
 			}
 		}
-	}*/
+		
+		elseif($auth == 'enseignant')
+		{
+			if ( isset( $_SESSION['pseudo'] ))
+			{
+				if ($_SESSION['pseudo'] = 'admin')
+				{
+					header('Location: ../auth.php');
+					exit();
+				}
+			}
+			else
+			{
+				header('Location: ../auth.php');
+				exit();
+			}
+		}
+	}
 
 	echo'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
@@ -90,7 +115,7 @@ function printHead($title, $auth, $param, $dbprefixe)
 			{
 				$pseudo = $_SESSION['pseudo'];
 				mysql_query("UPDATE " . $dbprefixe ."enseignant SET connectfail='non' WHERE identifiant='$pseudo'") or die(mysql_error());
-				$_SESSION['derniere_connexion_echouee'] = 'non';
+				//$_SESSION['derniere_connexion_echouee'] = 'non';
 
 				echo'<div id="attention" style="display:none;"><p style="font-size:130%; text-align:justify; margin-left:10px; margin-right:10px;">Il y a eu une ou plusieurs tentatives de connexions &eacute;chou&eacute;es 	&agrave; votre compte depuis votre d&eacute;rni&egrave;re visite. Si vous avez commis une erreur lors de la saisie de votre mot de passe, il n\'y a pas d\'inqui&eacute;tudes &agrave; avoir. Dans le cas contraire, nous vous sugg&eacute;rons de consulter le Journal des connexions de votre compte ...</p><p class="bottomform"><input type="button" value="Consulter le journal des connexions" onClick="window.location=\'moncompte.php\';"> <input type=\'button\' value=\'Fermer\' onclick=\'Modalbox.hide()\' /></p></div>
 				<body onLoad="Modalbox.show($(\'attention\'), {title: \'Attention !\', width: 500});">';

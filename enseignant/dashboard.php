@@ -23,18 +23,10 @@
 
 require_once("../core/init.php");
 
-if ($_SESSION['pseudo'] != 'admin')
-{
-	printHead('Tableau de bord enseignant', 'auth', 'ifconnectfail', $dbprefixe);
+printHead('Tableau de bord enseignant', 'enseignant', 'ifconnectfail', $dbprefixe);
 
-	/* LA SUITE DE LA PAGE ENSEIGNANT ICI */
+/* LA SUITE DE LA PAGE ENSEIGNANT ICI */
 
-	printFooter();
-}
-else
-{
-	header('Refresh: 0; url=auth.php');
-	exit();
-}
+printFooter();
 
 ?>

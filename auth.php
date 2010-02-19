@@ -39,8 +39,8 @@ if (isset($_SESSION['pseudo']))
 
 		mysql_query("UPDATE " . $dbprefixe ."log SET end='$date_de_deconnexion', termine='oui' WHERE session_id='$sessid'") or die(mysql_error());
 
-		session_destroy();
 		unset($_SESSION);
+		session_destroy();
 
 		$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
@@ -135,8 +135,7 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 
 		if ( mysql_affected_rows()=='1') // Si le pseudo saisi existe, on passe à la suite
 		{
-			$motdepasse = sha1($motdepasse.$tableau['salt']);
-
+			
 			$sql2 = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo' AND mot_de_passe='$motdepasse'");
 			$tableau2 = mysql_fetch_array ($sql2);
 
@@ -158,6 +157,7 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 				$sessid = session_id();
 
 				mysql_query("INSERT INTO " . $dbprefixe . "log VALUES('', '$pseudo', '$datedeconnexion', '$sessid', '$ip', '$navigateur', '$hote', 'non', 'non', '')") or die(mysql_error());
+				return TRUE;
 
 			}
 			else //Sinon, l'identifiant est correct mais pas le mot de passe, on log donc cela dans la BDD
@@ -179,19 +179,26 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 
 	//On stocke les données du formulaire dans des variables
 	$pseudo = mysql_real_escape_string($_POST['pseudo']);
+	
+	//On récupère le grain de sel de l'utilisateur
+	$sql = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo'");
+	$tableau = mysql_fetch_array ($sql);
+	
+	//On concatène le mot de passe et le grain de sel pour obtenir le mot de passe haché
 	$motdepasse = mysql_real_escape_string($_POST['motdepasse']);
-
+	$motdepasse = sha1($motdepasse.$tableau['salt']);
+	
 	//Si le couple identifiant/mot de passe saisi est valide
 	if ( verification( $pseudo, $motdepasse, $dbprefixe ) )
 	{
 		//On redirige la personne vers le tableau de bord approprié (enseignant ou admin)
 		if ($_SESSION['pseudo'] == 'admin')
 		{
-			header('Location: admin/dashboard.php?welcome-panel');
+			header('Location: admin/dashboard.php');
 		}
 		else
 		{
-			header('Location: enseignant/dashboard.php?welcome-panel');
+			header('Location: enseignant/dashboard.php');
 		}
 	}
 	else	//Sinon, on averti l'utilisateur que le couple identifiant, mot de passe est erroné.
