@@ -53,7 +53,7 @@ function db_query($sql)
 function printHead($title, $auth, $param, $dbprefixe)
 {
 	$datefr = datefr();
-	
+
 	if (isset($auth))
 	{
 		if($auth == 'admin')
@@ -72,7 +72,7 @@ function printHead($title, $auth, $param, $dbprefixe)
 				exit();
 			}
 		}
-		
+
 		elseif($auth == 'enseignant')
 		{
 			if ( isset( $_SESSION['pseudo'] ))
@@ -117,8 +117,12 @@ function printHead($title, $auth, $param, $dbprefixe)
 				mysql_query("UPDATE " . $dbprefixe ."enseignant SET connectfail='non' WHERE identifiant='$pseudo'") or die(mysql_error());
 				//$_SESSION['derniere_connexion_echouee'] = 'non';
 
-				echo'<div id="attention" style="display:none;"><p style="font-size:130%; text-align:justify; margin-left:10px; margin-right:10px;">Il y a eu une ou plusieurs tentatives de connexions &eacute;chou&eacute;es 	&agrave; votre compte depuis votre d&eacute;rni&egrave;re visite. Si vous avez commis une erreur lors de la saisie de votre mot de passe, il n\'y a pas d\'inqui&eacute;tudes &agrave; avoir. Dans le cas contraire, nous vous sugg&eacute;rons de consulter le Journal des connexions de votre compte ...</p><p class="bottomform"><input type="button" value="Consulter le journal des connexions" onClick="window.location=\'moncompte.php\';"> <input type=\'button\' value=\'Fermer\' onclick=\'Modalbox.hide()\' /></p></div>
-				<body onLoad="Modalbox.show($(\'attention\'), {title: \'Attention !\', width: 500});">';
+				echo'<body onload="Modalbox.show($(\'attention\'), {title: \'Attention !\', width: 500});">
+				<div id="attention" style="display:none;"><p>Il y a eu une ou plusieurs tentatives de connexions &eacute;chou&eacute;es &agrave; votre compte depuis votre derni&egrave;re visite. Si vous avez commis une erreur lors de la saisie de votre mot de passe, il n\'y a pas d\'inqui&eacute;tudes &agrave; avoir. Dans le cas contraire, nous vous sugg&eacute;rons de consulter le Journal des connexions de votre compte ...</p><p class="bottomform" style="margin-left:0px; margin-right:0px;"><input type="button" value="Consulter le journal des connexions" onclick="window.location=\'moncompte.php\';" /> <input type=\'button\' value=\'Fermer\' onclick=\'Modalbox.hide()\' /></p></div>';
+			}
+			else
+			{
+				echo'<body>';
 			}
 		}
 	}
@@ -138,11 +142,42 @@ function printHead($title, $auth, $param, $dbprefixe)
 					<span style="float:right;">' . $datefr . '</span><br />
 					<div style="padding-top:5px;">Bienvenue, ' .$_SESSION['prenomenseignant'] . ' ' . $_SESSION['nomenseignant'] . ' | <a href="../auth.php?logout" style="background-image: url(\'../style/img/deco.png\'); background-repeat: no-repeat; padding-left:20px;"> Se d&eacute;connecter</a></div>
 				</div>
-
-			</div>
-			<div id="corps" class="clearfix">
+			</div>';
+			echo printMenu();
+			echo'<div id="corps" class="clearfix">
 			<noscript><ul style="margin:0px; padding:0px;"><li class="error">Javascript est indispensable au bon fonctionnement de Opencomp et doit être activé dans votre navigateur ! <span style="float:right;"><small>Comment faire ?</small></span></li></ul></noscript>';
 }
+
+function printMenu()
+    {
+        // tableaux contenant les liens d'accès et le texte à afficher
+	$tab_menu_lien = array( "dashboard.php", "gerer-coordonnees.php", "gerer-equipe.php", "gerer-classes.php", "gerer-competences.php" );
+	$tab_menu_texte = array( "Tableau de bord", "Coordonnées", "Équipe éducative", "Classes", "Socle de compétences" );
+
+	// informations sur la page
+	$info = pathinfo($_SERVER['PHP_SELF']);
+
+	$menu = "\n<div id=\"menu\">\n    <ul id=\"onglets\">\n";
+
+
+
+	// boucle qui parcours les deux tableaux
+	foreach($tab_menu_lien as $cle=>$lien)
+	{
+	    $menu .= "    <li";
+
+	    // si le nom du fichier correspond à celui pointé par l'indice, alors on l'active
+	    if( $info['basename'] == $lien )
+	        $menu .= " class=\"active\"";
+
+	    $menu .= "><a href=\"" . $lien . "\">" . $tab_menu_texte[$cle] . "</a></li>\n";
+	}
+
+	$menu .= "</ul>\n</div>";
+
+        // on renvoie le code xHTML
+	return $menu;
+    }
 
 //Cette fonction permet d'inclure le pied de page.
 function printFooter()
