@@ -135,7 +135,7 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 
 		if ( mysql_affected_rows()=='1') // Si le pseudo saisi existe, on passe à la suite
 		{
-			
+
 			$sql2 = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo' AND mot_de_passe='$motdepasse'");
 			$tableau2 = mysql_fetch_array ($sql2);
 
@@ -179,15 +179,15 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 
 	//On stocke les données du formulaire dans des variables
 	$pseudo = mysql_real_escape_string($_POST['pseudo']);
-	
+
 	//On récupère le grain de sel de l'utilisateur
 	$sql = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo'");
 	$tableau = mysql_fetch_array ($sql);
-	
+
 	//On concatène le mot de passe et le grain de sel pour obtenir le mot de passe haché
 	$motdepasse = mysql_real_escape_string($_POST['motdepasse']);
 	$motdepasse = sha1($motdepasse.$tableau['salt']);
-	
+
 	//Si le couple identifiant/mot de passe saisi est valide
 	if ( verification( $pseudo, $motdepasse, $dbprefixe ) )
 	{
@@ -264,7 +264,7 @@ else
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 
 			<head>
-				<title>Gnote | Identifiez vous ...</title>
+				<title>'.TITLE_IDENTIFICATION.'</title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link type="text/css" href="style/style.css" rel="stylesheet" />
 			</head>
@@ -312,7 +312,7 @@ else
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 
 			<head>
-				<title>Gnote | Identifiez vous ...</title>
+				<title><?php echo TITLE_IDENTIFICATION; ?></title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link type="text/css" href="style/style.css" rel="stylesheet" />
 			</head>
@@ -323,25 +323,25 @@ else
 
 					<div class="topform">
 
-					<p class="topform_icon">Afin d'utiliser Gnote, vous devez vous identifier.</p>
+					<p class="topform_icon"><?php echo IDENTIFICATION_REQUIRD; ?></p>
 					</div>
 
 					<div class="contenuform">
 						<p class="infoform">
-							Toute tentative de connexion échouée est notifiée, de manière détaillée, à l'administrateur de cette application web.
+							<?php echo INFO_FAIL; ?>
 						</p>
 						<p>
-							<label for="pseudo">Identifiant : </label>
+							<label for="pseudo"><?php echo LOGIN; ?> : </label>
 							<input type="text" name="pseudo" id="pseudo" />
 						</p>
 						<p>
-							<label for="motdepasse">Mot de passe : </label>
+							<label for="motdepasse"><?php echo PASSWORD; ?> : </label>
 							<input type="password" name="motdepasse" id="motdepasse" />
 						</p>
 					</div>
 
 					<p class="bottomform">
-						<input type="submit" value="S'identifier" name="submit" id="submit" />
+						<input type="submit" value="<?php echo IDENTIFY_ME; ?>" name="submit" id="submit" />
 					</p>
 
 				</form>

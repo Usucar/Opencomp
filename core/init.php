@@ -24,6 +24,19 @@
 //Initialisation de la session
 session_start() ;
 
+$chemin = $_SERVER['PHP_SELF'];
+$fichier = explode('/', $chemin);
+$fichier = array_pop($fichier);
+
+if ($fichier == 'auth.php')
+{
+	include("lang/".$fichier);
+}
+else
+{
+	include("../lang/".$fichier);
+}
+
 //Inclusions des fichiers
 require_once("func.php");
 require_once("config.php");
