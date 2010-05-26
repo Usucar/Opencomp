@@ -264,7 +264,7 @@ else
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 
 			<head>
-				<title>'.TITLE_IDENTIFICATION.'</title>
+				<title>'.T_("Opencomp | Identifiez vous ...").'</title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link type="text/css" href="style/style.css" rel="stylesheet" />
 			</head>
@@ -275,27 +275,27 @@ else
 
 					<div class="topform">
 
-					<p class="topform_icon">Afin d\'utiliser Gnote, vous devez vous identifier.</p>
+					<p class="topform_icon">'.T_("Afin d'utiliser Gnote, vous devez vous identifier.").'</p>
 					</div>
 
 					<div class="contenuform">
-						<p class="infoform">
-							Toute tentative de connexion échouée est notifiée, de manière détaillée, à l\'administrateur de cette application web.
-						</p>
+						<p class="infoform">'
+							.T_("Toute tentative de connexion échouée est notifiée, de manière détaillée, à l'administrateur de cette application web.").
+						'</p>
 
 						<p>
-							<label for="pseudo">Identifiant : </label>
+							<label for="pseudo">'.T_("Identifiant").' :</label>
 							<input type="text" name="pseudo" id="pseudo" />
 						</p>
 						<p>
-							<label for="motdepasse">Mot de passe : </label>
+							<label for="motdepasse">'.T_("Mot de passe").' :</label>
 							<input type="password" name="motdepasse" id="motdepasse" />
 						</p>
-						<p style="color:red;">Il est nécessaire de completer tous les champs du formulaire !</p>
+						<p style="color:red;">'.T_("Il est nécessaire de completer tous les champs du formulaire !").'</p>
 					</div>
 
 					<p class="bottomform">
-						<input type="submit" value="S\'identifier" name="submit" id="submit" />
+						<input type="submit" value="'.T_("S'identifier").'" name="submit" id="submit" />
 					</p>
 
 				</form>
@@ -312,7 +312,7 @@ else
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 
 			<head>
-				<title><?php echo TITLE_IDENTIFICATION; ?></title>
+				<title><?php echo T_("Opencomp | Identifiez vous ..."); ?></title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link type="text/css" href="style/style.css" rel="stylesheet" />
 			</head>
@@ -323,25 +323,25 @@ else
 
 					<div class="topform">
 
-					<p class="topform_icon"><?php echo IDENTIFICATION_REQUIRD; ?></p>
+					<p class="topform_icon"><?php echo T_("Afin d'utiliser Gnote, vous devez vous identifier."); ?></p>
 					</div>
 
 					<div class="contenuform">
 						<p class="infoform">
-							<?php echo INFO_FAIL; ?>
+							<?php echo T_("Toute tentative de connexion échouée est notifiée, de manière détaillée, à l'administrateur de cette application web."); ?>
 						</p>
 						<p>
-							<label for="pseudo"><?php echo LOGIN; ?> : </label>
+							<label for="pseudo"><?php echo T_("Identifiant"); ?> : </label>
 							<input type="text" name="pseudo" id="pseudo" />
 						</p>
 						<p>
-							<label for="motdepasse"><?php echo PASSWORD; ?> : </label>
+							<label for="motdepasse"><?php echo T_("Mot de passe"); ?> : </label>
 							<input type="password" name="motdepasse" id="motdepasse" />
 						</p>
 					</div>
 
 					<p class="bottomform">
-						<input type="submit" value="<?php echo IDENTIFY_ME; ?>" name="submit" id="submit" />
+						<input type="submit" value="<?php echo T_("S'identifier"); ?>" name="submit" id="submit" />
 					</p>
 
 				</form>
