@@ -1,10 +1,22 @@
 <?php
+
 // define constants
 define('PROJECT_DIR', realpath('./'));
 define('LOCALE_DIR', PROJECT_DIR .'/lang');
 define('DEFAULT_LOCALE', 'fr_FR');
 
-require_once('library/gettext/gettext.inc');
+$chemin = $_SERVER['PHP_SELF'];
+$fichier = explode('/', $chemin);
+$fichier = array_pop($fichier);
+
+if ($fichier == 'auth.php')
+{
+	require_once("library/gettext/gettext.inc");
+}
+else
+{
+	require_once("../library/gettext/gettext.inc");
+}
 
 $supported_locales = array('fr_FR', 'en_US');
 $encoding = 'UTF-8';

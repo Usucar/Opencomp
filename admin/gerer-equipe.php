@@ -67,22 +67,9 @@
 
 if (isset($_GET['ajouter_enseignant']))
 {
-	if (isset($_POST['nombre_enseignant']))
-	{
-		$_POST['nombre_enseignant'] = htmlspecialchars($_POST['nombre_enseignant']);
-
-		if (preg_match("#[0-9]#", $_POST['nombre_enseignant']))
-		{
-			if (($_POST['nombre_enseignant']) <= 0)
-			{
-				echo '<h3>Ajouter des enseignants à l\'équipe éducative</h3><form method="post" action="gerer-equipe.php?ajouter_enseignant"><p>Combien souhaitez vous ajouter d\'enseignant ?</p><input type="text" name="nombre_enseignant" size="2" maxlength="2" /> <input type="submit" value="OK" /></form>
-			';
-			}
-
-			elseif (($_POST['nombre_enseignant']) == 1)
-			{
-				echo '<h3>Ajouter des enseignants à l\'équipe éducative</h3>
-				<p>Saisissez les informations concernant l\'enseignant que vous souhaitez ajouter à l\'équipe éducative.</p>
+				?>
+				<h3>Ajouter des enseignants à l'équipe éducative</h3>
+				<p>Saisissez les informations concernant l'enseignant que vous souhaitez ajouter à l'équipe éducative.</p>
 
 				<form method="post" id="form_ajouter_enseignant" action="gerer-equipe.php?ajouter_enseignant">
 				<table>
@@ -112,33 +99,13 @@ if (isset($_GET['ajouter_enseignant']))
 					</tr>
 				</table>
 				<input type="submit" id="ajouter_un_enseignant" name="ajouter_un_enseignant" value="Ajouter cet enseignant" style="margin-top:15px; margin-bottom:15px;"/>
-				</form>';
-			}
+				</form>
+				<?php
+}
 
-			elseif (($_POST['nombre_enseignant']) >= 11)
-			{
-				echo '<h3>Ajouter des enseignants à l\'équipe éducative</h3><form method="post" action="gerer-equipe.php?ajouter_enseignant"><p>Combien souhaitez vous ajouter d\'enseignant ?</p><input type="text" name="nombre_enseignant" size="2" maxlength="2" /> <input type="submit" value="OK" /><p>Il n\'est possible d\'ajouter que 10 enseignants maximum par ajout !</p></form>
-			';
-			}
-			elseif (($_POST['nombre_enseignant']) >= 2)
-			{
-				echo '<p>Vous souhaitez ajouter plusieurs enseignants</p>
-			';
-			}
-		}
-		else
-		{
-			echo '<h3>Ajouter des enseignants à l\'équipe éducative</h3><form method="post" action="gerer-equipe.php?ajouter_enseignant"><p>Combien souhaitez vous ajouter d\'enseignant ?</p><input type="text" name="nombre_enseignant" size="2" maxlength="2" /> <input type="submit" value="OK" /><p>Vous devez entrer un nombre entier.</p></form>';
-		}
-	}
-	elseif (isset ( $_POST['ajouter_un_enseignant'] ))
-	{
-		echo'Le formulaire a été envoyé';
-	}
-	else
-	{
-		echo '<h3>Ajouter des enseignants à l\'équipe éducative</h3><form method="post" action="gerer-equipe.php?ajouter_enseignant"><p>Combien souhaitez vous ajouter d\'enseignant ?</p><input type="text" name="nombre_enseignant" size="2" maxlength="2" /> <input type="submit" value="OK" /></form>';
-	}
+elseif (isset ( $_POST['ajouter_un_enseignant'] ))
+{
+	echo'Le formulaire a été envoyé';
 }
 else
 {
