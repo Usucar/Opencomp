@@ -86,9 +86,10 @@ body
 
 #corps
 {
-	font-family:"Arial";
+	font-family:"Verdana";
 	margin:20px;
 	font-size: 80%;
+	color:#777777;
 }
 
 #corps h2
@@ -469,6 +470,7 @@ li.error
         list-style-type : none;
         left : 1%;
         margin-top : 0;
+        width:98%;
 
 }
 
@@ -476,7 +478,7 @@ li.error
 #onglets li
 {
     float : left;
-    height : 21px; /* à modifier suivant la taille de la police pour centrer le texte dans l'onglet */
+    height : 21px; /* à modifier suivant la taille de la police pour centrer le texte dans l'onglet */    
     background-color: #F4F9FD;
     margin : 2px 2px 0 2px !important;  /* Pour les navigateurs autre que IE */
     margin : 1px 2px 0 2px;  /* Pour IE  */
@@ -487,6 +489,12 @@ li.error
 {
     border-bottom: 1px solid #fff;
     background-color: #fff;
+}
+
+#onglets li.right
+{
+    position: absolute;
+	right: 1px;
 }
 
 

@@ -21,17 +21,10 @@
  * ========================================================================
  */
 
-?>
+require_once("../core/init.php");
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
-		<head>
-			<title>Gnote | Gérer mon compte</title>
-			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<link type="text/css" href="../style/style.css" rel="stylesheet" />
-			<script type="text/javascript; charset=utf-8" src="../library/js/CheckForm.js"></script>
-
-			<script type='text/javascript'>
+$extrajavascript = <<<extrajavascript
+<script type='text/javascript'>
 
 			function MajusculeEnDebutDeChaine(Obj){
 				chaine=Obj.value
@@ -51,14 +44,13 @@
 
 
  			</script>
+extrajavascript;
 
-		</head>
+printHead('Gérer l\'équipe éducative', 'admin', 'extrajavascript', $dbprefixe);
 
-		<body>
+?>
 
-			<div id="corps">
-
-				<h2>Gérer l'équipe éducative</h2>
+<h2>Gérer l'équipe éducative</h2>
 
 <?php
 /*****************************************************************
@@ -74,15 +66,15 @@ if (isset($_GET['ajouter_enseignant']))
 				<form method="post" id="form_ajouter_enseignant" action="gerer-equipe.php?ajouter_enseignant">
 				<table>
 					<tr>
-						<td style="text-align:right;><label for="nom">Nom :</label></td>
+						<td style="text-align:right;"><label for="nom">Nom :</label></td>
 						<td><input type="text" size="25" name="nom" id="nom" style="border:1px solid #cacaca; " OnKeyUp="javascript:this.value=this.value.toUpperCase();" /><br /></td>
 					</tr>
 					<tr>
-						<td style="text-align:right;><label for="prenom">Prénom :</label></td>
+						<td style="text-align:right;"><label for="prenom">Prénom :</label></td>
 						<td><input type="text" size="25" name="prenom" id="prenom" style="border:1px solid #cacaca;" OnKeyUp="MajusculeEnDebutDeChaine(this)" /></td>
 					</tr>
 					<tr>
-						<td style="text-align:right;><label for="pseudo">Email :</label><br /><br /></td>
+						<td style="text-align:right;"><label for="pseudo">Email :</label><br /><br /></td>
 						<td><input type="text" size="37" name="email" id="email" style="border:1px solid #cacaca;" /><br /><br /></td>
 					</tr>
 					<tr>
@@ -90,11 +82,11 @@ if (isset($_GET['ajouter_enseignant']))
 						<td><input type="text" name="identifiant" id="identifiant" style="border:1px solid #cacaca;" /></td>
 					</tr>
 					<tr>
-						<td style="text-align:right;><label for="motdepasse">Mot de passe :</label></td>
+						<td style="text-align:right;"><label for="motdepasse">Mot de passe :</label></td>
 						<td><input type="password" name="motdepasse" id="motdepasse" style="border:1px solid #cacaca;" /></td>
 					</tr>
 					<tr>
-						<td style="text-align:right;><label for="motdepasse2">Confirmez le&nbsp;&nbsp;<br />mot de passe :</label></td>
+						<td style="text-align:right;"><label for="motdepasse2">Confirmez le&nbsp;&nbsp;<br />mot de passe :</label></td>
 						<td><input type="password" name="motdepasse2" id="motdepasse2" style="border:1px solid #cacaca;" /></td>
 					</tr>
 				</table>
@@ -102,19 +94,31 @@ if (isset($_GET['ajouter_enseignant']))
 				</form>
 				<?php
 }
-
-elseif (isset ( $_POST['ajouter_un_enseignant'] ))
-{
-	echo'Le formulaire a été envoyé';
-}
 else
 {
 	echo '<input type="button" value="Ajouter des enseignants" title="Ajouter des enseignants" class="ajouter" onclick="window.location=\'gerer-equipe.php?ajouter_enseignant\';"></input>';
 }
+
+if (isset ( $_POST['ajouter_un_enseignant'] ))
+{
+	
+	//On définit un grain de sel pour l'utilisateur aléatoirement et on hâche le mot de passe.
+	$graindesel = rand();
+	$hashmotdepasse = sha1(mysql_real_escape_string($_POST['motdepasse']).$graindesel);
+
+	$nom = mysql_real_escape_string($_POST['nom']);
+	$prenom = mysql_real_escape_string($_POST['prenom']);
+	$identifiant = mysql_real_escape_string($_POST['identifiant']);
+	$email = mysql_real_escape_string($_POST['email']);
+
+	//On ajoute le nouvel utilisateur à la BDD
+	
+	mysql_query("INSERT INTO ".$dbprefixe."enseignant (nom, prenom, identifiant, mot_de_passe, email, salt) VALUES ('$nom', '$prenom', '$identifiant', '$hashmotdepasse', '$email', '$graindesel');");
+	
+	echo 'L\'utilisateur a été correctement ajouté !';
+
+}
+
+printFooter();
+
 ?>
-
-			</div>
-
-		</body>
-
-	</html>

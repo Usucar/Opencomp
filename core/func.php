@@ -28,6 +28,7 @@ function get_microtime()
 	return ((float)$tps_usec + (float)$tps_sec);
 }
 
+
 //On stocke dans une variable globale le temps au début du chargement de la page
 $GLOBALS['tps_start'] = get_microtime();
 
@@ -56,39 +57,20 @@ function printHead($title, $auth, $param, $dbprefixe)
 
 	if (isset($auth))
 	{
-		if($auth == 'admin')
+		$pseudo = $_SESSION['pseudo'];
+		
+		if($auth == 'enseignant' AND $pseudo == 'admin')
 		{
-			if ( isset( $_SESSION['pseudo'] ))
-			{
-				if ($_SESSION['pseudo'] != 'admin')
-				{
-					header('Location: ../auth.php');
-					exit();
-				}
-			}
-			else
-			{
-				header('Location: ../auth.php');
-				exit();
-			}
+			header('Location: ../auth.php');
+			exit();
 		}
-
-		elseif($auth == 'enseignant')
+		
+		if($auth == 'admin' AND $pseudo != 'admin')
 		{
-			if ( isset( $_SESSION['pseudo'] ))
-			{
-				if ($_SESSION['pseudo'] = 'admin')
-				{
-					header('Location: ../auth.php');
-					exit();
-				}
-			}
-			else
-			{
-				header('Location: ../auth.php');
-				exit();
-			}
+			header('Location: ../auth.php');
+			exit();
 		}
+		
 	}
 
 	echo'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -98,17 +80,30 @@ function printHead($title, $auth, $param, $dbprefixe)
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<link type="text/css" href="../style/style.css" rel="stylesheet" />
 			<link type="text/css" href="../style/modalbox.css" rel="stylesheet" />
+			<link  href="http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light:regular" rel="stylesheet" type="text/css" >
 			<link rel="icon" type="image/png" href="../style/img/logo.png" />
 			<script type="text/javascript" src="../library/js/prototype.js"></script>
 			<script type="text/javascript" src="../library/js/scriptaculous.js?load=builder,effects"></script>
 			<script type="text/javascript" src="../library/js/modalbox.js"></script>
-		</head>' . "\n";
+			<script type="text/javascript; charset=utf-8" src="../library/js/CheckForm.js"></script>' . "\n";
+	
+	//Si on passe en paramètre de la fonction le terme 'extrajavascript', 
+	//alors le contenu de la variable $extrajavascript définie 
+	//avant l'appel de la fonction sera reproduit avant la fermeture de la balise head			
+	if(!empty($param) AND $param == 'extrajavascript')
+	{
+		echo $GLOBALS['extrajavascript'] . "\n" . ' </head>';
+	}
+	else
+	{
+		echo "\n" . ' </head>';
+	}
 
 	//Si on a indiqué un paramètre
 	if (!empty($param))
-	{
+	{		
 		//Et si ce paramètre est ifconnectfail
-		if($param = 'ifconnectfail')
+		if($param == 'ifconnectfail')
 		{
 			//On vérifie si la dernière connexion a été échouée ; si c'est le cas, on averti l'utilisateur avec body onload
 			if ($_SESSION['derniere_connexion_echouee'] == 'oui')
@@ -143,16 +138,23 @@ function printHead($title, $auth, $param, $dbprefixe)
 					<div style="padding-top:5px;">Bienvenue, ' .$_SESSION['prenomenseignant'] . ' ' . $_SESSION['nomenseignant'] . ' | <a href="../auth.php?logout" style="background-image: url(\'../style/img/deco.png\'); background-repeat: no-repeat; padding-left:20px;"> Se d&eacute;connecter</a></div>
 				</div>
 			</div>';
-			echo printMenu();
+			if($pseudo == 'admin')
+			{
+				echo printMenuadmin();
+			}
+			else
+			{
+				echo printMenuenseignant();
+			}			
 			echo'<div id="corps" class="clearfix">
 			<noscript><ul style="margin:0px; padding:0px;"><li class="error">Javascript est indispensable au bon fonctionnement de Opencomp et doit être activé dans votre navigateur ! <span style="float:right;"><small>Comment faire ?</small></span></li></ul></noscript>';
 }
 
-function printMenu()
+function printMenuadmin()
     {
         // tableaux contenant les liens d'accès et le texte à afficher
-	$tab_menu_lien = array( "dashboard.php", "gerer-coordonnees.php", "gerer-equipe.php", "gerer-classes.php", "gerer-competences.php" );
-	$tab_menu_texte = array( "Tableau de bord", "Coordonnées", "Équipe éducative", "Classes", "Socle de compétences" );
+	$tab_menu_lien = array( "dashboard.php", "gerer-coordonnees.php", "gerer-equipe.php", "gerer-classes.php", "gerer-competences.php", "moncompte.php" );
+	$tab_menu_texte = array( "Tableau de bord", "Coordonnées", "Équipe éducative", "Classes", "Socle de compétences", "Mon compte" );
 
 	// informations sur la page
 	$info = pathinfo($_SERVER['PHP_SELF']);
@@ -167,8 +169,57 @@ function printMenu()
 	    $menu .= "    <li";
 
 	    // si le nom du fichier correspond à celui pointé par l'indice, alors on l'active
-	    if( $info['basename'] == $lien )
+	        
+	    if( $lien == 'moncompte.php' AND $info['basename'] != 'moncompte.php')
+	        $menu .= " class=\"right\"";
+	        
+	    if( $info['basename'] == 'moncompte.php' AND $info['basename'] == $lien)
+	        $menu .= " class=\"active right\"";
+	    else 
+	    {
+			if( $info['basename'] == $lien )
 	        $menu .= " class=\"active\"";
+		}
+
+	    $menu .= "><a href=\"" . $lien . "\">" . $tab_menu_texte[$cle] . "</a></li>\n";
+	}
+
+	$menu .= "</ul>\n</div>";
+
+        // on renvoie le code xHTML
+	return $menu;
+    }
+    
+function printMenuenseignant()
+    {
+        // tableaux contenant les liens d'accès et le texte à afficher
+	$tab_menu_lien = array( "#", "#", "#", "#", "#", "moncompte.php" );
+	$tab_menu_texte = array( "Ceci", "sera", "le", "menu", "enseignant", "Mon compte" );
+
+	// informations sur la page
+	$info = pathinfo($_SERVER['PHP_SELF']);
+
+	$menu = "\n<div id=\"menu\">\n    <ul id=\"onglets\">\n";
+
+
+
+	// boucle qui parcours les deux tableaux
+	foreach($tab_menu_lien as $cle=>$lien)
+	{
+	    $menu .= "    <li";
+
+	    // si le nom du fichier correspond à celui pointé par l'indice, alors on l'active
+	        
+	    if( $lien == 'moncompte.php' AND $info['basename'] != 'moncompte.php')
+	        $menu .= " class=\"right\"";
+	        
+	    if( $info['basename'] == 'moncompte.php' AND $info['basename'] == $lien)
+	        $menu .= " class=\"active right\"";
+	    else 
+	    {
+			if( $info['basename'] == $lien )
+	        $menu .= " class=\"active\"";
+		}
 
 	    $menu .= "><a href=\"" . $lien . "\">" . $tab_menu_texte[$cle] . "</a></li>\n";
 	}

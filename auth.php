@@ -143,10 +143,10 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 			{
 				//On regénère un id session et on sauvegarde les infos concernant l'utilisateur dans la session
 				session_regenerate_id() ;
-				$_SESSION['nomenseignant'] = $tableau['nom'];
-				$_SESSION['prenomenseignant'] = $tableau['prenom'];
-				$_SESSION['email'] = $tableau['email'];
-				$_SESSION['derniere_connexion_echouee'] = $tableau['connectfail'];
+				$_SESSION['nomenseignant'] = $tableau2['nom'];
+				$_SESSION['prenomenseignant'] = $tableau2['prenom'];
+				$_SESSION['email'] = $tableau2['email'];
+				$_SESSION['derniere_connexion_echouee'] = $tableau2['connectfail'];
 				$_SESSION['pseudo'] = $pseudo ;
 
 				//On marque la dernière connexion de l'utilisateur comme terminée
