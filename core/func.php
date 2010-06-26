@@ -4,9 +4,9 @@
  * ========================================================================
  * Copyright (C) 2010 Traullé Jean
  *
- * This file is part of Gnote.
+ * This file is part of Opencomp.
  *
- * Gnote is free software; you can redistribute it and/or modify
+ * Opencomp is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with Gnote. If not, see <http://www.gnu.org/licenses/>
+ * with Opencomp. If not, see <http://www.gnu.org/licenses/>
  * ========================================================================
  */
 
@@ -57,21 +57,41 @@ function printHead($title, $auth, $param, $dbprefixe)
 
 	if (isset($auth))
 	{
-		$pseudo = $_SESSION['pseudo'];
-		
-		if($auth == 'enseignant' AND $pseudo == 'admin')
+		if($auth == 'admin')
 		{
-			header('Location: ../auth.php');
-			exit();
+			if ( isset( $_SESSION['pseudo'] ))
+			{
+				if ($_SESSION['pseudo'] != 'admin')
+				{
+						header('Location: ../auth.php');
+						exit();
+				}
+			}
+			else
+			{
+				header('Location: ../auth.php');
+				exit();
+			}
 		}
-		
-		if($auth == 'admin' AND $pseudo != 'admin')
+
+		elseif($auth == 'enseignant')
 		{
-			header('Location: ../auth.php');
-			exit();
+			if ( isset( $_SESSION['pseudo'] ))
+			{
+				if ($_SESSION['pseudo'] == 'admin')
+				{
+					header('Location: ../auth.php');
+					exit();
+				}
+			}
+			else
+			{
+				header('Location: ../auth.php');
+				exit();
+			}
 		}
-		
 	}
+
 
 	echo'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
@@ -110,7 +130,7 @@ function printHead($title, $auth, $param, $dbprefixe)
 			{
 				$pseudo = $_SESSION['pseudo'];
 				mysql_query("UPDATE " . $dbprefixe ."enseignant SET connectfail='non' WHERE identifiant='$pseudo'") or die(mysql_error());
-				//$_SESSION['derniere_connexion_echouee'] = 'non';
+				$_SESSION['derniere_connexion_echouee'] = 'non';
 
 				echo'<body onload="Modalbox.show($(\'attention\'), {title: \'Attention !\', width: 500});">
 				<div id="attention" style="display:none;"><p>Il y a eu une ou plusieurs tentatives de connexions &eacute;chou&eacute;es &agrave; votre compte depuis votre derni&egrave;re visite. Si vous avez commis une erreur lors de la saisie de votre mot de passe, il n\'y a pas d\'inqui&eacute;tudes &agrave; avoir. Dans le cas contraire, nous vous sugg&eacute;rons de consulter le Journal des connexions de votre compte ...</p><p class="bottomform" style="margin-left:0px; margin-right:0px;"><input type="button" value="Consulter le journal des connexions" onclick="window.location=\'moncompte.php\';" /> <input type=\'button\' value=\'Fermer\' onclick=\'Modalbox.hide()\' /></p></div>';
@@ -138,6 +158,7 @@ function printHead($title, $auth, $param, $dbprefixe)
 					<div style="padding-top:5px;">Bienvenue, ' .$_SESSION['prenomenseignant'] . ' ' . $_SESSION['nomenseignant'] . ' | <a href="../auth.php?logout" style="background-image: url(\'../style/img/deco.png\'); background-repeat: no-repeat; padding-left:20px;"> Se d&eacute;connecter</a></div>
 				</div>
 			</div>';
+			$pseudo = $_SESSION['pseudo'];
 			if($pseudo == 'admin')
 			{
 				echo printMenuadmin();

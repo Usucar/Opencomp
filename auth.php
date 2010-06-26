@@ -4,9 +4,9 @@
  * ========================================================================
  * Copyright (C) 2010 Traullé Jean
  *
- * This file is part of Gnote.
+ * This file is part of Opencomp.
  *
- * Gnote is free software; you can redistribute it and/or modify
+ * Opencomp is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with Gnote. If not, see <http://www.gnu.org/licenses/>
+ * with Opencomp. If not, see <http://www.gnu.org/licenses/>
  * ========================================================================
  */
 
@@ -253,8 +253,10 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 *   SINON SI la personne n'a pas complété les champs de forumalaire   *
 **********************************************************************/
 
-//Si les champs du formulaire ne sont pas tous remplis, c'est soit parce que la personne n'a pas encore rempli le formulaire de connexion ;
-//soit parce qu'elle n'a pas rempli tous les champs. Dans un cas comme dans l'autre, on affiche alors le formulaire.
+//Si les champs du formulaire ne sont pas tous remplis, c'est soit parce 
+//que la personne n'a pas encore rempli le formulaire de connexion ;
+//soit parce qu'elle n'a pas rempli tous les champs. Dans un cas comme 
+//dans l'autre, on affiche alors le formulaire.
 else
 {
 	//Si le formulaire a été validé, alors cela signifie que la personne n'a pas rempli tous les champs
