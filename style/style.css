@@ -456,7 +456,23 @@ li.error
    padding-left: 30px;
 }
 
+.success
+{
+   color: green;
+   background-color: #BFFFC7;
+   border: 1px solid green;
+   margin-top: 10px;
+   padding: 5px;
+}
 
+li.success
+{
+   list-style-type: none;
+   background-image: url("img/tick.png");
+   background-repeat: no-repeat;
+   background-position: 1% 50%;
+   padding-left: 30px;
+}
 
 
 

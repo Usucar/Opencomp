@@ -50,6 +50,16 @@ function db_query($sql)
 
 }
 
+//Cette fonction permet de vérifier la validité d'une adresse email avec les expressions régulières
+function VerifierAdresseMail($adresse)
+		{
+		   $Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
+		   if(preg_match($Syntaxe,$adresse))
+			  return true;
+		   else
+			 return false;
+		}
+
 //Cette fonction permet d'afficher l'en-tête de la page.
 function printHead($title, $auth, $param, $dbprefixe)
 {
@@ -168,7 +178,19 @@ function printHead($title, $auth, $param, $dbprefixe)
 				echo printMenuenseignant();
 			}			
 			echo'<div id="corps" class="clearfix">
-			<noscript><ul style="margin:0px; padding:0px;"><li class="error">Javascript est indispensable au bon fonctionnement de Opencomp et doit être activé dans votre navigateur ! <span style="float:right;"><small>Comment faire ?</small></span></li></ul></noscript>';
+			<noscript><ul style="margin:0px; padding:0px;"><li class="error">Javascript est indispensable au bon fonctionnement de Opencomp et doit être activé dans votre navigateur ! <span style="float:right;"><small>Comment faire ?</small></span></li></ul></noscript>
+			<h2>'.$title.'</h2>';
+			
+			if (isset($_SESSION['error']))
+			{
+				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="error">'.$_SESSION['error'].'</li></ul>';
+				unset($_SESSION['error']);
+			}
+			if (isset($_SESSION['success']))
+			{
+				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="success">'.$_SESSION['success'].'</li></ul>';
+				unset($_SESSION['success']);
+			}			
 }
 
 function printMenuadmin()

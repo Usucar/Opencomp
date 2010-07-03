@@ -50,8 +50,6 @@ printHead('Gérer l\'équipe éducative', 'admin', 'extrajavascript', $dbprefixe
 
 ?>
 
-<h2>Gérer l'équipe éducative</h2>
-
 <?php
 /******************************************************************
  * Si l'utilisateur a demandé gerer-equipe.php?ajouter_enseignant *
@@ -203,23 +201,84 @@ if (isset($_GET['ajouter_enseignant']))
 				<?php
 	}
 }
+
 elseif(isset($_GET['modifier_enseignant']))
-{
-	echo 'Vous souhaitez modifier un enseignant <br />';
-	echo 'Vous souhaitez modifier l\'enseignant avec l\'id : '.$_GET['id'];
-	
+{	
 	$requete = db_query("SELECT * FROM " . $dbprefixe ."enseignant WHERE id=".$_GET['id']); // Requête SQL
 	$resultat = mysql_fetch_assoc($requete);
-	echo '<pre>';
-	print_r ($resultat);
-	echo '</pre>';
+	
+	if ($_GET['id']==1)
+	{
+		$_SESSION['error'] = 'Il est impossible de modifier l\'administrateur !';
+		header('Location: gerer-equipe.php');	
+	}
+		
+	if (mysql_num_rows($requete) < '1' )
+	{
+		$_SESSION['error'] = 'L\'enseignant que vous souhaitez modifier n\'existe pas !';
+		header('Location: gerer-equipe.php');	
+	}
+	
+	else
+	{
+		if ( (!empty ( $_POST['nom'] )) && (!empty ( $_POST['prenom'] )) && (!empty ( $_POST['identifiant'] )) && (!empty ( $_POST['email'] )) && (VerifierAdresseMail($_POST['email'])==1) )
+		{
+			$nom = mysql_real_escape_string($_POST['nom']);
+			$prenom = mysql_real_escape_string($_POST['prenom']);
+			$identifiant = mysql_real_escape_string($_POST['identifiant']);
+			$email = mysql_real_escape_string($_POST['email']);
+
+			//On met à jour l'utilisateur dans la BDD
+			
+			$id = $_GET['id'];
+			mysql_query("UPDATE ".$dbprefixe."enseignant SET nom='$nom', prenom='$prenom', identifiant='$identifiant', email='$email' WHERE id='$id'") or die(mysql_error());
+			
+			$_SESSION['success'] = 'L\'enseignant a été mis à jour avec succès !';
+			header('Location: gerer-equipe.php');
+		}
+		
+		?>
+			<h3>Modifier les informations concernant <?php echo $resultat['prenom'].' '.$resultat['nom']; ?></h3>
+			<form method="post" id="form_ajouter_enseignant" action="gerer-equipe.php?modifier_enseignant&id=<?php echo $_GET['id']; ?>">
+				<table>
+					<tr>
+						<td style="text-align:right;"><label for="nom">Nom :</label></td>
+						<td><input type="text" size="25" name="nom" id="nom" value="<?php echo $resultat['nom']; ?>" style="border:1px solid #cacaca; " OnKeyUp="javascript:this.value=this.value.toUpperCase();" /><br /></td>
+					</tr>
+					<tr>
+						<td style="text-align:right;"><label for="prenom">Prénom :</label></td>
+						<td><input type="text" size="25" name="prenom" id="prenom" value="<?php echo $resultat['prenom']; ?>" style="border:1px solid #cacaca;" OnKeyUp="MajusculeEnDebutDeChaine(this)" /></td>
+					</tr>
+					<tr>
+						<td style="text-align:right;"><label for="pseudo">Email :</label><br /><br /></td>
+						<td><input type="text" size="37" name="email" id="email" value="<?php echo $resultat['email']; ?>" style="border:1px solid #cacaca;" /><br /><br /></td>
+					</tr>
+					<tr>
+						<td style="text-align:right;"><label for="identifiant">Identifiant :</label></td>
+						<td><input type="text" name="identifiant" id="identifiant" value="<?php echo $resultat['identifiant']; ?>" style="border:1px solid #cacaca;" /></td>
+					</tr>					
+				</table>
+				<input type="submit" id="modifier_un_enseignant" name="modifier_un_enseignant" value="Modifier cet enseignant" style="margin-top:15px; margin-bottom:15px;"/>
+			</form>
+		<?php
+				
+		echo '<pre>';
+		print_r ($resultat);
+		echo '</pre>';
+	}
+
 
 }
 
+elseif(isset($_GET['supprimer_enseignant']))
+{
+	
+}
+
+//Si aucun paramètre n'a été passé dans l'URL, alors on affiche la liste des enseignants.
 else
 {
 	echo '<input type="button" value="Ajouter des enseignants" title="Ajouter des enseignants" class="ajouter" onclick="window.location=\'gerer-equipe.php?ajouter_enseignant\';"></input><p></p>';
-	
 	$requete = db_query("SELECT * FROM " . $dbprefixe ."enseignant ORDER BY nom, prenom ASC"); // Requête SQL
 	
 	echo '<table style="width: 100%; border-collapse: collapse; border:1px solid black;">
@@ -236,9 +295,13 @@ else
 		echo '<td style="border-right:1px solid black; padding:5px;">' . $donnees['nom'] . '</td>';
 		echo '<td style="border-right:1px solid black; padding:5px;">' . $donnees['identifiant'] . '</td>';
 		echo '<td style="border-right:1px solid black; padding:5px;">' . $donnees['email'] . '</td>';
-		echo '<td width=200px; style="border-right:1px solid black; padding:5px;"><center><a href=gerer-equipe.php?modifier_enseignant&id=' . $donnees['id'] . '><img style="border:0px;" src="../style/img/user_edit.png"> Modifier</a> <a href=gerer-equipe.php?supprimer_enseignant&id=' . $donnees['id'] . '><img style="border:0px;" src="../style/img/user_delete.png"> Supprimer</a></td></tr></center>';	
+		echo '<td width=200px; style="border-right:1px solid black; padding:5px;"><center><a href=gerer-equipe.php?modifier_enseignant&id=' . $donnees['id'] . '><img style="border:0px;" src="../style/img/user_edit.png"> Modifier</a> <a id="suppr'.$donnees['id'].'" href=gerer-equipe.php?supprimer_enseignant&id=' . $donnees['id'] . ' onclick="this.blur(); Modalbox.show($(\'attention\'), {title: \'Êtes vous sûr(e) ?\', width: 600}); return false;"><img style="border:0px;" src="../style/img/user_delete.png"> Supprimer</a></td></tr></center>';	
 	}
 		echo '</table></ br></ br>';
+		echo '<div id="attention" style="display:none;"><p>Souhaitez vous réellement supprimer cet enseignant ?</p><p class="bottomform" style="margin-left:0px; margin-right:0px;"><input type="button" value="Consulter le journal des connexions" onclick="window.location=\'gerer-equipe.php?supprimer_enseignant&id='.$donnees['id'].'\';" /> <input type=\'button\' value=\'Fermer\' onclick=\'Modalbox.hide()\' /></p></div>';
+		echo '<script>
+  alert(document.getElementById(""))
+</script>';
 	
 }
 
