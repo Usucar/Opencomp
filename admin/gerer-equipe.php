@@ -61,16 +61,7 @@ if (isset($_GET['ajouter_enseignant']))
 	{	
 		$_SESSION['donneessaisies'] = $_POST;
 		$donneessaisies = $_SESSION['donneessaisies'];
-		
-		function VerifierAdresseMail($adresse)
-		{
-		   $Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
-		   if(preg_match($Syntaxe,$adresse))
-			  return true;
-		   else
-			 return false;
-		}
-		
+			
 		if ( (!empty ( $_POST['nom'] )) && (!empty ( $_POST['prenom'] )) && (!empty ( $_POST['motdepasse'] )) && (!empty ( $_POST['identifiant'] )) && (!empty ( $_POST['email'] )) && ($_POST['motdepasse'] == $_POST['motdepasse2']) && (VerifierAdresseMail($_POST['email'])==1) )
 		{
 			//On définit un grain de sel pour l'utilisateur aléatoirement et on hâche le mot de passe.
@@ -296,7 +287,7 @@ else
 		echo '<td style="border-right:1px solid black; padding:5px;">' . $donnees['identifiant'] . '</td>';
 		echo '<td style="border-right:1px solid black; padding:5px;">' . $donnees['email'] . '</td>';
 		echo '<td width=200px; style="border-right:1px solid black; padding:5px;"><center><a href=gerer-equipe.php?modifier_enseignant&id=' . $donnees['id'] . '><img style="border:0px;" src="../style/img/user_edit.png"> Modifier</a> <a id="suppr'.$donnees['id'].'" href=gerer-equipe.php?supprimer_enseignant&id=' . $donnees['id'] . ' onclick="this.blur(); Modalbox.show($(\'attention'.$donnees['id'].'\'), {title: \'Êtes vous sûr(e) ?\', width: 600}); return false;"><img style="border:0px;" src="../style/img/user_delete.png"> Supprimer</a></td></tr></center>';	
-		echo '<div id="attention'.$donnees['id'].'" style="display:none;"><p>Souhaitez vous réellement supprimer cet enseignant ?</p><p class="bottomform" style="margin-left:0px; margin-right:0px;"><input type="button" value="Confirmer la suppression" onclick="window.location=\'gerer-equipe.php?supprimer_enseignant&id='.$donnees['id'].'\';" /> <input type=\'button\' value=\'Annuler\' onclick=\'Modalbox.hide()\' /></p></div>';
+		echo '<div id="attention'.$donnees['id'].'" style="display:none;"><p>Souhaitez vous réellement supprimer '.$donnees['prenom'].' '.$donnees['nom'].' ?</p><p class="bottomform" style="margin-left:0px; margin-right:0px;"><input type="button" value="Confirmer la suppression" onclick="window.location=\'gerer-equipe.php?supprimer_enseignant&id='.$donnees['id'].'\';" /> <input type=\'button\' value=\'Annuler\' onclick=\'Modalbox.hide()\' /></p></div>';
 	}
 		echo '</table></ br></ br>';
 }
