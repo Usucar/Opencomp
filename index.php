@@ -4,7 +4,7 @@
  * ========================================================================
  * Copyright (C) 2010 Traullé Jean
  *
- * This file is part of Gnote.
+ * This file is part of Opencomp.
  *
  * Gnote is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  * ========================================================================
  */
 
-//Si le fichier de configuration existe et qu'il n'est pas vide, c'est que Gnote a été installé avec succès.
+// Si le fichier de configuration existe et qu'il n'est pas vide, c'est que Opencomp a été installé avec succès.
 $fichierconfig = 'core/config.php';
 if(file_exists($fichierconfig) AND filesize($fichierconfig) > 0)
 {
