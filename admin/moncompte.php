@@ -50,12 +50,13 @@ printHead('Gérer mon compte', 'auth', '', $dbprefixe);
 				<tr>
 					<td style="text-align:right;">Email :</td>';
 
-					//Si la personne n'a pas modifié son email, alors on affiche celui stocké dans la session.
-					if (!isset ($_POST['email']))
-					{
-						echo '<td><input type="text" name="email" id="email" size="30" value="' . $_SESSION['email'] . '" /></td>';
-					}
-					//Sinon, on définit la fonction VerifierAdresseMail(), on récupère le nouveau mail saisi, puis, on vérifie si l'adresse est bonne. Si c'est le cas, on fait un update dans la BDD et on met à jour la variable de session email ; sinon on indique à l'utilisateur que l'adresse doit être de la forme adresse@fournisseur.tld
+					// Si la personne n'a pas modifié son email, alors on affiche celui stocké dans la session.
+                    if (!isset ($_POST['email']))
+                    {
+					    echo '<td><input type="text" name="email" id="email" size="30" value="' . $_SESSION['email'] . '" /></td>';
+                    }
+
+                    // Sinon, on définit la fonction VerifierAdresseMail(), on récupère le nouveau mail saisi, puis, on vérifie si l'adresse est bonne. Si c'est le cas, on fait un update dans la BDD et on met à jour la variable de session email ; sinon on indique à l'utilisateur que l'adresse doit être de la forme adresse@fournisseur.tld
 					else
 					{
 						function VerifierAdresseMail($nouveauemail)
@@ -114,8 +115,8 @@ printHead('Gérer mon compte', 'auth', '', $dbprefixe);
 			{
 				$dureejournal = 'dix dernières connexions';
 			}
-
-			echo'<h3>Journal des ' . $dureejournal . '</h3>
+?>
+			<h3>Journal des ' . $dureejournal . '</h3>
 			<p>Cette section liste les dernières connexions effectuées sur votre compte.</p>
 				<ul>
 					<li>Les lignes en rouge indiquent une tentative de connexion échouée avec un mot de passe erroné.</li>
@@ -123,22 +124,23 @@ printHead('Gérer mon compte', 'auth', '', $dbprefixe);
 					<li>Les lignes en noir indiquent une session close normalement.</li>
 					<li>Les lignes en vert indiquent la session en cours.</li>
 				</ul>';
-
+<?
 			//Message d'information sur les sessions
-			echo'
+?>
 				<div id="attention" style="display:none;">
 					<div style="text-align:justify; font-family: Verdana,Arial,sans-serif; font-size: 0.70em; margin-left:20px; margin-right:20px;">
-						<p>Le message "Session non terminée" peut s\'afficher pour plusieurs raisons :</p>
+						<p>Le message "Session non terminée" peut s'afficher pour plusieurs raisons :</p>
 						<ul>
-							<li>Dans le cas ou vous avez fermé votre navigateur sans cliquer d\'abord sur le lien "Se 	déconnecter" situé en haut, à droite.</li>
+							<li>Dans le cas ou vous avez fermé votre navigateur sans cliquer d'abord sur le lien "Se déconnecter" situé en haut, à droite.</li>
 							<li>Dans le cas ou vous avez initié une autre session sur un autre ordinateur sans fermer la première avec le lien "Se déconnecter".</li>
 						</ul>
 						<p>Dans tous les cas, ce message ne devrait pas apparaître. Vous DEVEZ vous déconnecter manuellement pour des raisons de sécurité !</p>
 					</div>
 					<p class="bottomform">
-						<input type=\'button\' value=\'Promis, je ferai attention la prochaine fois !\' onclick=\'Modalbox.hide()\' />
+						<input type='button' value='Promis, je ferai attention la prochaine fois !' onclick='Modalbox.hide()' />
 					</p>
-				</div>';
+                </div>
+<?
 
 			//On définit la fonction Convertirdate() qui convertit la date du format de la base de donnée (0000-00-00 00:00:00) vers un format lisible par l'utilisateur (00/00/0000 à 00 h 00)
 			function Convertirdate($chaine_date)
