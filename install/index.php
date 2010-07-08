@@ -4,7 +4,7 @@
  * ========================================================================
  * Copyright (C) 2010 Traullé Jean
  *
- * This file is part of Gnote.
+ * This file is part of Opencomp.
  *
  * Gnote is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,69 +17,66 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with Gnote. If not, see <http://www.gnu.org/licenses/>
+ * with Opencomp. If not, see <http://www.gnu.org/licenses/>
  * ========================================================================
  */
 
-/************************************
-* Fichier d'installation d'Opencomp	*
-************************************/
+/*************************************
+ * Fichier d'installation d'Opencomp *
+ *************************************/
 
 //Si l'utilisateur a demandé l'étape 1, on l'affiche
 if (isset($_GET['step1']))
 {
 	//La première étape souhaite la bienvenue à l'utilisateur
-	echo'
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
    <head>
-       <title>Gnote | Installation</title>
+       <title>Opencomp | Installation</title>
        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	   <link rel="stylesheet" media="screen" type="text/css" href="style/style.css" />
    </head>
    <body>
-   <div id="page">
-   		<div id="en_tete">
-   		<p>Installation automatisée de Opencomp ...</p>
-		</div>
+        <div id="page">
+   		    <div id="en_tete">
+   	    	    <p>Installation automatisée de Opencomp ...</p>
+    		</div>
+		    <div id="corps">
+	            <div id="menu">
+                    <fieldset>
+                        <legend>Étapes</legend>
+    	    			<ul>
+                            <li class="encours">Bienvenue</li>
+                            <li class="afaire">Licence utilisateur</li>
+                            <li class="afaire">Vérification des droits</li>
+                            <li class="afaire">Connexion à la <acronym title="Base de données">BDD</acronym></li>
+                            <li class="afaire">Identifiant administrateur</li>
+                            <li class="afaire">Fin de l'installation</li>
+                        </ul>
+                    </fieldset>
+                </div>
+    	    	<fieldset style="padding:15px;">
+		            <legend>Bienvenue</legend>
+                    <p style="margin-top:0px;">Cet assistant va vous aider à installer Opencomp sur votre serveur.</p>
+                    <p>Dans le cas ou l'installation automatisée échouerait, nous vous invitons à consulter la <a href="http://zolotaya.isa-geek.com/redmine/projects/gnote/wiki">documentation d\'Opencomp</a> pour connaître la marche à suivre pour installer l'application manuellement.</p>
+        			<p>Cliquez sur le bouton "Suivant" pour démarrer la procédure d'installation.</p>
 
-		<div id="corps">
-	    <div id="menu">
-               <fieldset>
-					<legend>Étapes</legend>
-					<ul>
-                   <li class="encours">Bienvenue</li>
-                   <li class="afaire">Licence utilisateur</li>
-                   <li class="afaire">Vérification des droits</li>
-                   <li class="afaire">Connexion à la <acronym title="Base de données">BDD</acronym></li>
-                   <li class="afaire">Identifiant administrateur</li>
-                   <li class="afaire">Fin de l\'installation</li>
-                   </ul>
-               </fieldset>
+	    		    <form method="post" action="index.php?step2">
+		        		<p class="bottomform" style="margin-bottom:0px;">
+			    	        <input name="step1" id="step1" type="submit" value="Suivant >>" />
+				        </p>
+    			    </form>
+	    	    </fieldset>
+		    </div>
+	    </div>
+    	<div id="pied_de_page">
+            <p style="color:#4A4A4A;">Opencomp est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE.<br />
+            Pour plus d'informations, reportez vous à la licence GNU/GPL.</p>
         </div>
-
-
-
-		<fieldset style="padding:15px;">
-					<legend>Bienvenue</legend>
-					<p style="margin-top:0px;">Cet assistant va vous aider à installer Opencomp sur votre serveur.</p> <p>Dans le cas ou l\'installation automatisée échouerait, nous vous invitons à consulter la <a href="http://zolotaya.isa-geek.com/redmine/projects/gnote/wiki">documentation d\'Opencomp</a> pour connaître la marche à suivre pour installer l\'application manuellement.</p>
-					<p>Cliquez sur le bouton "Suivant" pour démarrer la procédure d\'installation.</p>
-
-					<form method="post" action="index.php?step2">
-					<p class="bottomform" style="margin-bottom:0px;">
-					<input name="step1" id="step1" type="submit" value="Suivant >>" />
-					</p>
-					</form>
-			</fieldset>
-		</div>
-	</div>
-	<div id="pied_de_page">
-		   <p style="color:#4A4A4A;">Opencomp est distribué dans l\'espoir qu\'il sera utile, mais SANS AUCUNE GARANTIE.<br />Pour plus d\'informations, reportez vous à la licence GNU/GPL.</p>
-	</div>
-
-   </body>
+    </body>
 </html>
-	';
+<?
 }
 
 //Sinon si l'utilisateur a demandé l'étape 2, on l'affiche
