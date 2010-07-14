@@ -116,14 +116,14 @@ printHead('Gérer mon compte', 'auth', '', $dbprefixe);
 				$dureejournal = 'dix dernières connexions';
 			}
 ?>
-			<h3>Journal des ' . $dureejournal . '</h3>
+			<h3>Journal des <?php echo $dureejournal ?></h3>
 			<p>Cette section liste les dernières connexions effectuées sur votre compte.</p>
 				<ul>
 					<li>Les lignes en rouge indiquent une tentative de connexion échouée avec un mot de passe erroné.</li>
 					<li>Les lignes en orange indiquent une session pour laquelle vous ne vous êtes pas déconnecté correctement.</li>
 					<li>Les lignes en noir indiquent une session close normalement.</li>
 					<li>Les lignes en vert indiquent la session en cours.</li>
-				</ul>';
+				</ul>
 <?
 			//Message d'information sur les sessions
 ?>
