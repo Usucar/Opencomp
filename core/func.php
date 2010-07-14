@@ -64,9 +64,11 @@ function VerifierAdresseMail($adresse)
 function printHead($title, $auth, $param, $dbprefixe)
 {
 	$datefr = datefr();
-
+	
+	//On vérifie que la personne est identifiée si le paramètre $auth est renseigné
 	if (isset($auth))
 	{
+		//Si la page demandée est réservée à l'administratateur et que le pseudo dans la session n'est pas égal à admin, alors, on renvoie la personne sur la page auth.php
 		if($auth == 'admin')
 		{
 			if ( isset( $_SESSION['pseudo'] ))
@@ -83,7 +85,8 @@ function printHead($title, $auth, $param, $dbprefixe)
 				exit();
 			}
 		}
-
+		
+		//Si la page demandée est réservée à un enseignant et que le pseudo dans la session est égal à admin, alors, on renvoie la personne sur la page auth.php
 		elseif($auth == 'enseignant')
 		{
 			if ( isset( $_SESSION['pseudo'] ))
@@ -168,7 +171,10 @@ function printHead($title, $auth, $param, $dbprefixe)
 					<div style="padding-top:5px;">Bienvenue, ' .$_SESSION['prenomenseignant'] . ' ' . $_SESSION['nomenseignant'] . ' | <a href="../auth.php?logout" style="background-image: url(\'../style/img/deco.png\'); background-repeat: no-repeat; padding-left:20px;"> Se d&eacute;connecter</a></div>
 				</div>
 			</div>';
+			
 			$pseudo = $_SESSION['pseudo'];
+			
+			// On affiche le menu correspondant au statut de la personne connectée
 			if($pseudo == 'admin')
 			{
 				echo printMenuadmin();
@@ -177,22 +183,39 @@ function printHead($title, $auth, $param, $dbprefixe)
 			{
 				echo printMenuenseignant();
 			}			
+			
+			// Puis on affiche le titre de la page et (éventuellement) un avertissement sur la necessité de javascript.
 			echo'<div id="corps" class="clearfix">
 			<noscript><ul style="margin:0px; padding:0px;"><li class="error">Javascript est indispensable au bon fonctionnement de Opencomp et doit être activé dans votre navigateur ! <span style="float:right;"><small>Comment faire ?</small></span></li></ul></noscript>
 			<h2>'.$title.'</h2>';
 			
+			// Si la variable de session error n'est pas vide, alors on la parcours et on affiche les éventuels messages d'erreur.
 			if (isset($_SESSION['error']))
 			{
-				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="error">'.$_SESSION['error'].'</li></ul>';
+				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="error">';
+				foreach($_SESSION['error'] as $msgflash)
+				{
+					echo $msgflash . '<br />'; 
+				}
+				echo '</li></ul>';
 				unset($_SESSION['error']);
 			}
+			
+			// Si la variable de session success n'est pas vide, alors on la parcours et on affiche les éventuels messages d'erreur.
 			if (isset($_SESSION['success']))
 			{
-				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="success">'.$_SESSION['success'].'</li></ul>';
+				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="success">';
+				foreach($_SESSION['success'] as $msgflash)
+				{
+					echo $msgflash . '<br />'; 
+				}
+				echo '</li></ul>';
 				unset($_SESSION['success']);
+
 			}			
 }
 
+// Cette fonction permet d'afficher le menu de navigation de l'administrateur
 function printMenuadmin()
     {
         // tableaux contenant les liens d'accès et le texte à afficher
@@ -232,7 +255,8 @@ function printMenuadmin()
         // on renvoie le code xHTML
 	return $menu;
     }
-    
+
+// Cette fonction permet d'afficher le menu de navigation de l'enseignant   
 function printMenuenseignant()
     {
         // tableaux contenant les liens d'accès et le texte à afficher

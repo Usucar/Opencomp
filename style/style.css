@@ -453,7 +453,7 @@ li.error
    background-image: url("img/cross.png");
    background-repeat: no-repeat;
    background-position: 1% 50%;
-   padding-left: 30px;
+   padding-left: 35px;
 }
 
 .success
@@ -471,7 +471,7 @@ li.success
    background-image: url("img/tick.png");
    background-repeat: no-repeat;
    background-position: 1% 50%;
-   padding-left: 30px;
+   padding-left: 35px;
 }
 
 
