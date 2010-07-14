@@ -200,7 +200,9 @@ elseif(isset($_GET['modifier_enseignant']))
 
 	if ($_GET['id']==1)
 	{
-		$_SESSION['error'] = 'Il est impossible de modifier l\'administrateur !';
+		$_SESSION['error'][1] = 'Il est impossible de modifier l\'administrateur !';
+		$_SESSION['error'][3236] = 'Il est impossible de modifier l\'administrateur 2 !';
+
 		header('Location: gerer-equipe.php');
     }
 
@@ -224,11 +226,11 @@ elseif(isset($_GET['modifier_enseignant']))
 			$id = $_GET['id'];
 			mysql_query("UPDATE ".$dbprefixe."enseignant SET nom='$nom', prenom='$prenom', identifiant='$identifiant', email='$email' WHERE id='$id'") or die(mysql_error());
 
-			$_SESSION['success'] = 'L\'enseignant a été mis à jour avec succès !';
+			$_SESSION['success'][0] = 'L\'enseignant a été mis à jour avec succès !';
 			header('Location: gerer-equipe.php');
 		}
-
 		?>
+		
 			<h3>Modifier les informations concernant <?php echo $resultat['prenom'].' '.$resultat['nom']; ?></h3>
 			<form method="post" id="form_ajouter_enseignant" action="gerer-equipe.php?modifier_enseignant&id=<?php echo $_GET['id']; ?>">
 				<table>
