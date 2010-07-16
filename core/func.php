@@ -192,11 +192,29 @@ function printHead($title, $auth, $param, $dbprefixe)
 			// Si la variable de session error n'est pas vide, alors on la parcours et on affiche les éventuels messages d'erreur.
 			if (isset($_SESSION['error']))
 			{
-				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="error">';
+				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="error" id="error">';
 				foreach($_SESSION['error'] as $msgflash)
 				{
 					echo $msgflash . '<br />'; 
 				}
+				
+				?>
+				
+				<script type='text/javascript'>		
+					
+					
+					window.setTimeout(function() {
+						new Effect.Highlight('error', { startcolor: '#FFFFFF', endcolor: '#FFBDBD', restorecolor: '#FFE7E7',keepBackgroundImage: 'true' });
+					}, 200);
+					
+					window.setTimeout(function() {
+						new Effect.Fade('error');
+					}, 10000);	
+									
+				</script>
+				
+				<?php
+				
 				echo '</li></ul>';
 				unset($_SESSION['error']);
 			}
@@ -204,14 +222,31 @@ function printHead($title, $auth, $param, $dbprefixe)
 			// Si la variable de session success n'est pas vide, alors on la parcours et on affiche les éventuels messages d'erreur.
 			if (isset($_SESSION['success']))
 			{
-				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="success">';
+				echo '<ul style="margin-bottom:10px; padding:0px;"><li class="success" id="success">';
 				foreach($_SESSION['success'] as $msgflash)
 				{
 					echo $msgflash . '<br />'; 
 				}
+				
+				?>
+				
+				<script type='text/javascript'>		
+					
+					
+					window.setTimeout(function() {
+						new Effect.Highlight('success', { startcolor: '#FFFFFF', endcolor: '#BFFFC7', restorecolor: '#DFF9E3',keepBackgroundImage: 'true' });
+					}, 200);
+					
+					window.setTimeout(function() {
+						new Effect.Fade('success');
+					}, 10000);	
+									
+				</script>
+				
+				<?php
+				
 				echo '</li></ul>';
 				unset($_SESSION['success']);
-
 			}			
 }
 

@@ -43,7 +43,9 @@ $extrajavascript = <<<extrajavascript
 				}
 
 
- 			</script>
+	
+
+</script>
 extrajavascript;
 
 printHead('Gérer l\'équipe éducative', 'admin', 'extrajavascript', $dbprefixe);
