@@ -79,7 +79,8 @@ if (isset($_GET['ajouter_enseignant']))
 
 			mysql_query("INSERT INTO ".$dbprefixe."enseignant (nom, prenom, identifiant, mot_de_passe, email, salt) VALUES ('$nom', '$prenom', '$identifiant', '$hashmotdepasse', '$email', '$graindesel');");
 
-			echo 'L\'utilisateur a été correctement ajouté !';
+			$_SESSION['success']['1'] = 'L\'enseignant a été ajouté avec succès.';
+			header('Location: gerer-equipe.php');
 		}
 		else
 		{
