@@ -56,22 +56,14 @@ printHead('Gérer mon compte', 'admin', '', $dbprefixe);
 					    echo '<td><input type="text" name="email" id="email" size="30" value="' . $_SESSION['email'] . '" /></td>';
                     }
 
-                    // Sinon, on définit la fonction VerifierAdresseMail(), on récupère le nouveau mail saisi, puis, on vérifie si l'adresse est bonne. Si c'est le cas, on fait un update dans la BDD et on met à jour la variable de session email ; sinon on indique à l'utilisateur que l'adresse doit être de la forme adresse@fournisseur.tld
+                    // Sinon, on récupère le nouveau mail saisi, puis, on vérifie si l'adresse est bonne. Si c'est le cas, on fait un update dans la BDD et on met à jour la variable de session email ; sinon on indique à l'utilisateur que l'adresse doit être de la forme adresse@fournisseur.tld
 					else
-					{
-						function VerifierAdresseMail($nouveauemail)
-						{
-						   $Syntaxe='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
-						   if(preg_match($Syntaxe,$nouveauemail))
-								return true;
-						   else
-								return false;
-						}
+					{						
 						$pseudo = $_SESSION['pseudo'];
 						$nouveauemail = mysql_real_escape_string($_POST['email']);
 						if (VerifierAdresseMail($nouveauemail))
 						{
-							db_query("UPDATE " . $dbprefixe ."enseignant SET email='$nouveauemail' WHERE identifiant='$pseudo'") or die(mysql_error());
+							$bdd->exec("UPDATE " . $dbprefixe ."enseignant SET email='$nouveauemail' WHERE identifiant='$pseudo'") or die(mysql_error());
 							$_SESSION['email'] = $nouveauemail;
 							echo '<td><input type="text" name="email" id="email" size="30" value="' . $_SESSION['email'] . '" /></td>';
 						}
