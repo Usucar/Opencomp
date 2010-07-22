@@ -63,7 +63,7 @@ printHead('Gérer mon compte', 'enseignant', '', $dbprefixe);
 						$nouveauemail = mysql_real_escape_string($_POST['email']);
 						if (VerifierAdresseMail($nouveauemail))
 						{
-							$bdd->exec("UPDATE " . $dbprefixe ."enseignant SET email='$nouveauemail' WHERE identifiant='$pseudo'") or die(mysql_error());
+							$bdd->exec("UPDATE " . $dbprefixe ."enseignant SET email='$nouveauemail' WHERE identifiant='$pseudo'");
 							$_SESSION['email'] = $nouveauemail;
 							echo '<td><input type="text" name="email" id="email" size="30" value="' . $_SESSION['email'] . '" /></td>';
 						}
