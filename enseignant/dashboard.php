@@ -27,6 +27,6 @@ printHead('Tableau de bord enseignant', 'enseignant', 'ifconnectfail', $dbprefix
 
 /* LA SUITE DE LA PAGE ENSEIGNANT ICI */
 
-printFooter();
+printFooter($bdd);
 
 ?>

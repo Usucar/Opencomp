@@ -41,15 +41,6 @@ function datefr()
 	return "Nous sommes le ". $datefr;
 }
 
-//Cette fonction permet de compter le nombre de requêtes mysql exécutées pour la page
-function db_query($sql)
-{
-	global $nb_requete;
-	$nb_requete++;
-	return mysql_query($sql);
-
-}
-
 //Cette fonction permet de vérifier la validité d'une adresse email avec les expressions régulières
 function VerifierAdresseMail($adresse)
 		{
@@ -142,7 +133,7 @@ function printHead($title, $auth, $param, $dbprefixe)
 			if ($_SESSION['derniere_connexion_echouee'] == 'oui')
 			{
 				$pseudo = $_SESSION['pseudo'];
-				mysql_query("UPDATE " . $dbprefixe ."enseignant SET connectfail='non' WHERE identifiant='$pseudo'") or die(mysql_error());
+				$bdd->exec("UPDATE " . $dbprefixe ."enseignant SET connectfail='non' WHERE identifiant='$pseudo'");
 				$_SESSION['derniere_connexion_echouee'] = 'non';
 
 				echo'<body onload="Modalbox.show($(\'attention\'), {title: \'Attention !\', width: 500});">
@@ -333,7 +324,7 @@ function printMenuenseignant()
     }
 
 //Cette fonction permet d'inclure le pied de page.
-function printFooter()
+function printFooter($bdd)
 {
 	//On referme les balises précédemment ouvertes
 	echo'</div>
@@ -351,17 +342,17 @@ function printFooter()
 	echo "<p style='position:relative; top:7px; left:10px;'>Opencomp est distribué sous licence <a href ='http://www.april.org/gnu/gpl_french.html'>GNU/GPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'>Forge du projet Opencomp</a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'>rapporter une anomalie</a></p><div style='float:right; position:relative; bottom:18px; right:10px;'>Page générée en $tps seconde";
 
 		//Petite attention de langage sur le singulier/pluriel.
-		if (!isset ($GLOBALS['nb_requete']))
+		if ($bdd->count() == 0)
 		{
 			echo', aucune requête exécutée.</div>';
 		}
-		elseif ($GLOBALS['nb_requete'] == 1)
+		elseif ($bdd->count() == 1)
 		{
 			echo', 1 requête exécutée.</div>';
 		}
 		else
 		{
-			echo ', ' . $GLOBALS['nb_requete'] . ' requêtes exécutées.</div>';
+			echo ', ' . $bdd->count() . ' requêtes exécutées.</div>';
 		}
 
 	//On referme les balises précédemment ouvertes

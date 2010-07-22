@@ -297,6 +297,6 @@ else
 		echo '</table></ br></ br>';
 }
 
-printFooter();
+printFooter($bdd);
 
 ?>

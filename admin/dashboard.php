@@ -27,6 +27,6 @@ printHead('Tableau de bord administrateur', 'admin', 'ifconnectfail', $dbprefixe
 
 	/* LA SUITE DE LA PAGE ADMIN ICI */
 
-printFooter();
+printFooter($bdd);
 
 ?>

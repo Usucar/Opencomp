@@ -23,7 +23,7 @@
 
 include("../core/init.php");
 
-printHead('Gérer mon compte', 'auth', '', $dbprefixe);
+printHead('Gérer mon compte', 'admin', '', $dbprefixe);
 
 			/********************************************************************
 			* On affiche les informations personnelles de la personne connectée *
@@ -174,29 +174,29 @@ printHead('Gérer mon compte', 'auth', '', $dbprefixe);
 				switch ($_POST['depuis'])
 				{
 					case 'dix dernières connexions':
-					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC LIMIT 10");
+					$requete = $bdd->query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC LIMIT 10");
 					break;
 
 					case 'connexions depuis une semaine':
-					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 7 ORDER BY start DESC");
+					$requete = $bdd->query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 7 ORDER BY start DESC");
 					break;
 
 					case 'connexions depuis quinze jours':
-					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 15 ORDER BY start DESC");
+					$requete = $bdd->query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 15 ORDER BY start DESC");
 					break;
 
 					case 'connexions depuis un mois':
-					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 31 ORDER BY start DESC");
+					$requete = $bdd->query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' AND (TO_DAYS(NOW()) - TO_DAYS(start)) < 31 ORDER BY start DESC");
 					break;
 
 					case 'connexions depuis le début':
-					$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC");
+					$requete = $bdd->query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC");
 					break;
 				}
 			}
 			else
 			{
-				$requete = db_query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC LIMIT 10"); // Requête SQL
+				$requete = $bdd->query("SELECT * FROM " . $dbprefixe ."log WHERE login='$pseudo' ORDER BY start DESC LIMIT 10"); // Requête SQL
 			}
 
 			//Pour afficher les logs d'aujourd'hui :
@@ -211,7 +211,7 @@ printHead('Gérer mon compte', 'auth', '', $dbprefixe);
 					<th style="border:1px solid black;">Navigateur &amp; Système d\'exploitation</th>
 				</tr>';
 
-			while ($donnees = mysql_fetch_array($requete) )
+			while ($donnees = $requete->fetch() )
 			{
 				//On détermine
 				//les couleurs :si erreur de mot de passe, ligne en rouge et en gras
@@ -336,5 +336,5 @@ printHead('Gérer mon compte', 'auth', '', $dbprefixe);
 		</div>
 
 <?php
-printFooter();
+printFooter($bdd);
 ?>

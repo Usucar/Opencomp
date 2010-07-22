@@ -37,7 +37,7 @@ if (isset($_SESSION['pseudo']))
 		$date_de_deconnexion = date('Y-m-d H:i:s');
 		$sessid = session_id();
 
-		mysql_query("UPDATE " . $dbprefixe ."log SET end='$date_de_deconnexion', termine='oui' WHERE session_id='$sessid'") or die(mysql_error());
+		$bdd->exec("UPDATE " . $dbprefixe ."log SET end='$date_de_deconnexion', termine='oui' WHERE session_id='$sessid'") or die(mysql_error());
 
 		unset($_SESSION);
 		session_destroy();
@@ -105,13 +105,13 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 	*   On définit la fonction verification()   *
 	********************************************/
 
-	function verification($pseudo,$motdepasse,$dbprefixe)
+	function verification($pseudo,$motdepasse,$dbprefixe,$bdd)
 	{
+			
 		//Exécution de la requête
 		//mysql_query("SET NAMES UTF8");
-		$sql = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo'");
-		$tableau = mysql_fetch_array ($sql);
-
+		$reponse = $bdd->query("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo'");
+		
 		//On définit la fonction get_ip() qui permet d'obtenir l'adresse ip de l'internaute
 		function get_ip()
 		{
@@ -133,37 +133,38 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 		$navigateur = $navigateur->parent . ' - ' . $navigateur->platform;
 		$datedeconnexion = date('Y-m-d H:i:s');
 
-		if ( mysql_affected_rows()=='1') // Si le pseudo saisi existe, on passe à la suite
+		if ($reponse->rowCount() == 1) // Si le pseudo saisi existe, on passe à la suite
 		{
 
-			$sql2 = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo' AND mot_de_passe='$motdepasse'");
-			$tableau2 = mysql_fetch_array ($sql2);
+			$sql2 = "SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo' AND mot_de_passe='$motdepasse'";
+			$reponse2 = $bdd->query($sql2);
+			$donnees2 = $reponse2->fetch();
 
-			if ( mysql_affected_rows()=='1') //Si le mot de passe est correct
+			if ($reponse2->rowCount() == 1) //Si le mot de passe est correct
 			{
 				//On regénère un id session et on sauvegarde les infos concernant l'utilisateur dans la session
 				session_regenerate_id() ;
-				$_SESSION['nomenseignant'] = $tableau2['nom'];
-				$_SESSION['prenomenseignant'] = $tableau2['prenom'];
-				$_SESSION['email'] = $tableau2['email'];
-				$_SESSION['derniere_connexion_echouee'] = $tableau2['connectfail'];
+				$_SESSION['nomenseignant'] = $donnees2['nom'];
+				$_SESSION['prenomenseignant'] = $donnees2['prenom'];
+				$_SESSION['email'] = $donnees2['email'];
+				$_SESSION['derniere_connexion_echouee'] = $donnees2['connectfail'];
 				$_SESSION['pseudo'] = $pseudo ;
 
 				//On marque la dernière connexion de l'utilisateur comme terminée
 				//(dans le cas où la personne ne s'est pas déconnecté manuellement)
-				mysql_query("UPDATE " . $dbprefixe ."log SET termine='oui' WHERE login='$pseudo' AND termine='non'") or die(mysql_error());
+				$bdd->exec("UPDATE " . $dbprefixe ."log SET termine='oui' WHERE login='$pseudo' AND termine='non'");
 
 				//On inscrit la connexion dans le journal
 				$sessid = session_id();
 
-				mysql_query("INSERT INTO " . $dbprefixe . "log VALUES('', '$pseudo', '$datedeconnexion', '$sessid', '$ip', '$navigateur', '$hote', 'non', 'non', '')") or die(mysql_error());
+				$bdd->exec("INSERT INTO " . $dbprefixe . "log VALUES('', '$pseudo', '$datedeconnexion', '$sessid', '$ip', '$navigateur', '$hote', 'non', 'non', '')");
 				return TRUE;
 
 			}
 			else //Sinon, l'identifiant est correct mais pas le mot de passe, on log donc cela dans la BDD
 			{
-				mysql_query("INSERT INTO " . $dbprefixe ."log VALUES('', '$pseudo', '$datedeconnexion', 'nosess', '$ip', '$navigateur', '$hote', 'oui', 'oui', '')") or die(mysql_error());
-				mysql_query("UPDATE " . $dbprefixe ."enseignant SET connectfail='oui' WHERE identifiant='$pseudo'") or die(mysql_error());
+				$bdd->exec("INSERT INTO " . $dbprefixe ."log VALUES('', '$pseudo', '$datedeconnexion', 'nosess', '$ip', '$navigateur', '$hote', 'oui', 'oui', '')");
+				$bdd->exec("UPDATE " . $dbprefixe ."enseignant SET connectfail='oui' WHERE identifiant='$pseudo'");
 				return FALSE;
 			}
 		}
@@ -178,18 +179,19 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 	**************************************************/
 
 	//On stocke les données du formulaire dans des variables
-	$pseudo = mysql_real_escape_string($_POST['pseudo']);
+	$pseudo = $_POST['pseudo'];
 
 	//On récupère le grain de sel de l'utilisateur
-	$sql = mysql_query ("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo'");
-	$tableau = mysql_fetch_array ($sql);
+	$sql = $bdd->query("SELECT * FROM " . $dbprefixe ."enseignant WHERE identifiant='$pseudo'");
+	$tableau = $sql->fetch();
+
 
 	//On concatène le mot de passe et le grain de sel pour obtenir le mot de passe haché
-	$motdepasse = mysql_real_escape_string($_POST['motdepasse']);
+	$motdepasse = $_POST['motdepasse'];
 	$motdepasse = sha1($motdepasse.$tableau['salt']);
 
 	//Si le couple identifiant/mot de passe saisi est valide
-	if ( verification( $pseudo, $motdepasse, $dbprefixe ) )
+	if ( verification( $pseudo, $motdepasse, $dbprefixe, $bdd ) )
 	{
 		//On redirige la personne vers le tableau de bord approprié (enseignant ou admin)
 		if ($_SESSION['pseudo'] == 'admin')

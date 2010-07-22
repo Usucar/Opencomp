@@ -59,7 +59,7 @@ if (isset($_GET['step1']))
     	    	<fieldset style="padding:15px;">
 		            <legend>Bienvenue</legend>
                     <p style="margin-top:0px;">Cet assistant va vous aider à installer Opencomp sur votre serveur.</p>
-                    <p>Dans le cas ou l'installation automatisée échouerait, nous vous invitons à consulter la <a href="http://zolotaya.isa-geek.com/redmine/projects/gnote/wiki">documentation d\'Opencomp</a> pour connaître la marche à suivre pour installer l'application manuellement.</p>
+                    <p>Dans le cas ou l'installation automatisée échouerait, nous vous invitons à consulter la <a href="http://zolotaya.isa-geek.com/redmine/projects/gnote/wiki">documentation d'Opencomp</a> pour connaître la marche à suivre pour installer l'application manuellement.</p>
         			<p>Cliquez sur le bouton "Suivant" pour démarrer la procédure d'installation.</p>
 
 	    		    <form method="post" action="index.php?step2">
@@ -396,10 +396,10 @@ echo'
  * ========================================================================
  */
 
-$dbhote   = "'. $hote .'";
-$dbuser  = "'. $login .'";
-$dbpass    = "'. $mdp .'";
-$dbbase   = "'. $base .'";
+define(\'DSN1\', \'mysql:host='. $hote .';dbname='. $base .'\');
+define(\'USER1\', \''. $login .'\');
+define(\'PASS1\', \''. $mdp .'\');
+
 $dbprefixe   = "'. $prefixe .'";
 
 ?>';
@@ -449,7 +449,7 @@ $dbprefixe   = "'. $prefixe .'";
 								//Sinon, si on arrive à selectionner la base, on fait les même opération qu'à partir de la ligne 383
 								else
 								{
-									$texte = '<?php
+										$texte = '<?php
 
 /*
  * ========================================================================
@@ -472,10 +472,10 @@ $dbprefixe   = "'. $prefixe .'";
  * ========================================================================
  */
 
-$dbhote   = "'. $hote .'";
-$dbuser  = "'. $login .'";
-$dbpass    = "'. $mdp .'";
-$dbbase   = "'. $base .'";
+define(\'DSN1\', \'mysql:host='. $hote .';dbname='. $base .'\');
+define(\'USER1\', \''. $login .'\');
+define(\'PASS1\', \''. $mdp .'\');
+
 $dbprefixe   = "'. $prefixe .'";
 
 ?>';
@@ -586,14 +586,22 @@ elseif (isset($_GET['step5']))
 								if (strlen($_POST['passadmin']) >= 6)
 								{
 									include("../core/config.php");
-									mysql_connect($dbhote, $dbuser, $dbpass);
-									mysql_select_db($dbbase);
+									try 
+									{
+										$bdd = new PDO(DSN1, USER1, PASS1);
+										$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+									}
+									catch (PDOException $e)
+									{
+										print "Erreur ! : " . $e->getMessage() . "<br />";
+										die();
+									}
 
 									//On vérifie qu'il n'existe pas déjà un administrateur
 
-									mysql_query("SELECT identifiant FROM ".$dbprefixe."enseignant WHERE identifiant ='admin'");
+									$reponse = $bdd->query("SELECT identifiant FROM ".$dbprefixe."enseignant WHERE identifiant ='admin'");
 
-									if (mysql_affected_rows()>='1')
+									if ($reponse->rowCount() == 1)
 									{
 										exit('<ul><li class="error">Un identifiant administrateur a déjà été créé pour cette installation d\'Opencomp !</li></ul>
 										<p>Par mesure de sécurité, il n\'est pas possible de créer un second compte administrateur.</p>
@@ -611,12 +619,8 @@ elseif (isset($_GET['step5']))
 
 										//Pour pouvoir manipuler les accents sans problème, utf8
 										
-										//Uniquement à partir de PHP 5.2.3
-										//mysql_set_charset('utf8');
-										mysql_query("set names 'utf8';");
-
 										//On ajoute l'administrateur à la BDD
-										mysql_query("INSERT INTO ".$dbprefixe."enseignant (nom, prenom, identifiant, mot_de_passe, email, salt) VALUES ('$nomadmin', '$prenomadmin', 'admin', '$hashmotdepasse', '$emailadmin', '$graindesel');") or die(mysql_error());
+										$bdd->exec("INSERT INTO ".$dbprefixe."enseignant (nom, prenom, identifiant, mot_de_passe, email, salt) VALUES ('$nomadmin', '$prenomadmin', 'admin', '$hashmotdepasse', '$emailadmin', '$graindesel');");
 
 										exit('<ul><li class="ok">L\'identifiant administrateur d\'Opencomp a été créé avec succès</li></ul>
 										<p class="bottomform" style="margin-bottom:0px;"><a href="index.php?step6">>> Suivant</a></p>');
