@@ -41,12 +41,14 @@ if (isset($_SESSION['pseudo']))
 
 		unset($_SESSION);
 		session_destroy();
+		
+		?>
 
-		$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 
 			<head>
-				<title>Gnote | Identifiez vous ...</title>
+				<title><?php echo T_("Opencomp | Identifiez vous ...") ?></title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link type="text/css" href="style/style.css" rel="stylesheet" />
 			</head>
@@ -57,28 +59,29 @@ if (isset($_SESSION['pseudo']))
 
 					<div class="top_msg_error">
 
-					<p class="icon_ok">Succès</p>
+					<p class="icon_ok"><?php echo T_("Succès") ?></p>
 					</div>
 
 					<div class="contenuform">
 						<p class="infoform">
-							Vous avez été déconnecté avec succès.<br /><br />
+							<?php echo T_("Vous avez été déconnecté avec succès.") ?><br /><br />
 
-							Vous pouvez maintenant fermer cette page ou cet onglet.<br /><br />
+							<?php echo T_("Vous pouvez maintenant fermer cette page ou cet onglet.") ?><br /><br />
 
-							Si une autre personne souhaite se connecter à Gnote, il suffit de cliquer sur "S\'identifier de nouveau" !
+							<?php echo T_("Si une autre personne souhaite se connecter à Opencomp, il suffit de cliquer sur \"S'identifier de nouveau\" !") ?>
 						</p>
 					</div>
 					<p class="bottomform">
-					<input type="button" value="S\'identifier de nouveau" ONCLICK="window.location=\'auth.php\';">
+					<input type="button" value="S'identifier de nouveau" onclick="window.location='auth.php';">
 					</p>
 				</form>
 
 			</body>
 
-		</html>' ;
-		echo $message;
+		</html>
+		<?php
 	}
+	
 	//SINON, elle n'a rien à faire sur cette page d'identification puisque elle est déjà identifiée
 	else
 	{
@@ -205,11 +208,12 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 	}
 	else	//Sinon, on averti l'utilisateur que le couple identifiant, mot de passe est erroné.
 	{
-		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	?>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 
 			<head>
-				<title>Gnote | Identifiez vous ...</title>
+				<title><?php echo T_("Opencomp | Identifiez vous ...") ?></title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link type="text/css" href="style/style.css" rel="stylesheet" />
 			</head>
@@ -220,33 +224,36 @@ elseif ( (!empty ( $_POST['pseudo'] )) && (!empty ( $_POST['motdepasse'] )) )
 
 					<div class="topform">
 
-					<p class="topform_icon">Afin d\'utiliser Gnote, vous devez vous identifier.</p>
+					<p class="topform_icon"><?php echo T_("Afin d\'utiliser Opencomp, vous devez vous identifier.") ?></p>
 					</div>
 
 					<div class="contenuform">
 						<p class="infoform">
-							Toute tentative de connexion échouée est notifiée, de manière détaillée, à l\'administrateur de cette application web.
+							<?php echo T_("Toute tentative de connexion échouée est notifiée, de manière détaillée, à l'administrateur de cette application web.") ?>
+							
 						</p>
 						<p>
-							<label for="pseudo">Identifiant : </label>
+							<label for="pseudo"><?php echo T_("Identifiant") ?> : </label>
 							<input type="text" name="pseudo" id="pseudo" />
 						</p>
 						<p>
-							<label for="motdepasse">Mot de passe : </label>
+							<label for="motdepasse"><?php echo T_("Mot de passe") ?> : </label>
 							<input type="password" name="motdepasse" id="motdepasse" />
 						</p>
-						<p style="color:red;">Le couple identifiant, mot de passe que vous avez saisi est incorrect !</p>
+						<p style="color:red;"><?php echo T_("Le couple identifiant, mot de passe que vous avez saisi est incorrect !") ?></p>
 					</div>
 
 					<p class="bottomform">
-						<input type="submit" value="S\'identifier" name="submit" id="submit" />
+						<input type="submit" value="S'identifier" name="submit" id="submit" />
 					</p>
 
 				</form>
 
 			</body>
 
-		</html>' ;
+		</html>
+		
+	<?php
 	}
 
 }
@@ -264,11 +271,12 @@ else
 	//Si le formulaire a été validé, alors cela signifie que la personne n'a pas rempli tous les champs
 	if (isset ( $_POST['submit'] ))
 	{
-		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	?>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 
 			<head>
-				<title>'.T_("Opencomp | Identifiez vous ...").'</title>
+				<title><?php echo T_("Opencomp | Identifiez vous ...") ?></title>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 				<link type="text/css" href="style/style.css" rel="stylesheet" />
 			</head>
@@ -279,27 +287,25 @@ else
 
 					<div class="topform">
 
-					<p class="topform_icon">'.T_("Afin d'utiliser Gnote, vous devez vous identifier.").'</p>
+					<p class="topform_icon"><?php echo T_("Afin d'utiliser Opencomp, vous devez vous identifier.") ?></p>
 					</div>
 
 					<div class="contenuform">
-						<p class="infoform">'
-							.T_("Toute tentative de connexion échouée est notifiée, de manière détaillée, à l'administrateur de cette application web.").
-						'</p>
+						<p class="infoform"><?php echo T_("Toute tentative de connexion échouée est notifiée, de manière détaillée, à l'administrateur de cette application web.") ?></p>
 
 						<p>
-							<label for="pseudo">'.T_("Identifiant").' :</label>
+							<label for="pseudo"><?php echo T_("Identifiant") ?> :</label>
 							<input type="text" name="pseudo" id="pseudo" />
 						</p>
 						<p>
-							<label for="motdepasse">'.T_("Mot de passe").' :</label>
+							<label for="motdepasse"><?php echo T_("Mot de passe") ?> :</label>
 							<input type="password" name="motdepasse" id="motdepasse" />
 						</p>
-						<p style="color:red;">'.T_("Il est nécessaire de completer tous les champs du formulaire !").'</p>
+						<p style="color:red;"><?php echo T_("Il est nécessaire de completer tous les champs du formulaire !") ?></p>
 					</div>
 
 					<p class="bottomform">
-						<input type="submit" value="'.T_("S'identifier").'" name="submit" id="submit" />
+						<input type="submit" value="<?php echo T_("S'identifier") ?>" name="submit" id="submit" />
 					</p>
 
 				</form>
@@ -307,6 +313,7 @@ else
 			</body>
 
 		</html>';
+	<?php
 	}
 	//Sinon, cela signifie que le formulaire n'a jamais été affiché, on affiche donc le formulaire
 	else
@@ -327,7 +334,7 @@ else
 
 					<div class="topform">
 
-					<p class="topform_icon"><?php echo T_("Afin d'utiliser Gnote, vous devez vous identifier."); ?></p>
+					<p class="topform_icon"><?php echo T_("Afin d'utiliser Opencomp, vous devez vous identifier."); ?></p>
 					</div>
 
 					<div class="contenuform">

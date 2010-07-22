@@ -142,6 +142,7 @@ class myPDOStatement extends PDOStatement
 try 
 {
 	$bdd = new myPDO(DSN1, USER1, PASS1);
+	$bdd->exec('SET CHARACTER SET utf8');
 	$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e)

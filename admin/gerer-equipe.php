@@ -48,7 +48,7 @@ $extrajavascript = <<<extrajavascript
 </script>
 extrajavascript;
 
-printHead('Gérer l\'équipe éducative', 'admin', 'extrajavascript', $dbprefixe);
+printHead('Gérer l\'équipe éducative', 'admin', 'extrajavascript', $dbprefixe, $bdd);
 
 ?>
 
@@ -68,25 +68,22 @@ if (isset($_GET['ajouter_enseignant']))
 		{
 			//On définit un grain de sel pour l'utilisateur aléatoirement et on hâche le mot de passe.
 			$graindesel = rand();
-			$hashmotdepasse = sha1(mysql_real_escape_string($_POST['motdepasse']).$graindesel);
+			$hashmotdepasse = sha1(($_POST['motdepasse']).$graindesel);
 
-			$nom = mysql_real_escape_string($_POST['nom']);
-			$prenom = mysql_real_escape_string($_POST['prenom']);
-			$identifiant = mysql_real_escape_string($_POST['identifiant']);
-			$email = mysql_real_escape_string($_POST['email']);
+			$nom = $_POST['nom'];
+			$prenom = $_POST['prenom'];
+			$identifiant = $_POST['identifiant'];
+			$email = $_POST['email'];
 
 			//On ajoute le nouvel utilisateur à la BDD
 
-			mysql_query("INSERT INTO ".$dbprefixe."enseignant (nom, prenom, identifiant, mot_de_passe, email, salt) VALUES ('$nom', '$prenom', '$identifiant', '$hashmotdepasse', '$email', '$graindesel');");
+			$bdd->exec("INSERT INTO ".$dbprefixe."enseignant (nom, prenom, identifiant, mot_de_passe, email, salt) VALUES ('$nom', '$prenom', '$identifiant', '$hashmotdepasse', '$email', '$graindesel');");
 
 			$_SESSION['success']['1'] = 'L\'enseignant a été ajouté avec succès.';
 			header('Location: gerer-equipe.php');
 		}
 		else
 		{
-			/*echo '<pre>';
-			print_r($donneessaisies);
-			echo '</pre>';*/
 
 			if ( (empty ( $_POST['nom'] )) OR (empty ( $_POST['prenom'] )) OR (empty ( $_POST['motdepasse'] )) OR (empty ( $_POST['identifiant'] )) OR (empty ( $_POST['email'] )) )
 			{
@@ -196,10 +193,14 @@ if (isset($_GET['ajouter_enseignant']))
 	}
 }
 
+
+/******************************************************************
+ * Si l'utilisateur a demandé gerer-equipe.php?modifier_enseignant *
+ *****************************************************************/
 elseif(isset($_GET['modifier_enseignant']))
 {
-	$requete = db_query("SELECT * FROM " . $dbprefixe ."enseignant WHERE id=".$_GET['id']); // Requête SQL
-	$resultat = mysql_fetch_assoc($requete);
+	$requete = $bdd->query("SELECT * FROM " . $dbprefixe ."enseignant WHERE id=".$_GET['id']); // Requête SQL
+	$resultat = $requete->fetch();
 
 	if ($_GET['id']==1)
 	{
@@ -209,9 +210,9 @@ elseif(isset($_GET['modifier_enseignant']))
 		header('Location: gerer-equipe.php');
     }
 
-	if (mysql_num_rows($requete) < '1' )
+	if ($requete->rowCount() < 1)
 	{
-		$_SESSION['error'] = 'L\'enseignant que vous souhaitez modifier n\'existe pas !';
+		$_SESSION['error'][1] = 'L\'enseignant que vous souhaitez modifier n\'existe pas !';
 		header('Location: gerer-equipe.php');
 	}
 
@@ -219,15 +220,15 @@ elseif(isset($_GET['modifier_enseignant']))
 	{
 		if ( (!empty ( $_POST['nom'] )) && (!empty ( $_POST['prenom'] )) && (!empty ( $_POST['identifiant'] )) && (!empty ( $_POST['email'] )) && (VerifierAdresseMail($_POST['email'])==1) )
 		{
-			$nom = mysql_real_escape_string($_POST['nom']);
-			$prenom = mysql_real_escape_string($_POST['prenom']);
-			$identifiant = mysql_real_escape_string($_POST['identifiant']);
-			$email = mysql_real_escape_string($_POST['email']);
+			$nom = $_POST['nom'];
+			$prenom = $_POST['prenom'];
+			$identifiant = $_POST['identifiant'];
+			$email = $_POST['email'];
 
 			// On met à jour l'utilisateur dans la BDD
 
 			$id = $_GET['id'];
-			mysql_query("UPDATE ".$dbprefixe."enseignant SET nom='$nom', prenom='$prenom', identifiant='$identifiant', email='$email' WHERE id='$id'") or die(mysql_error());
+			$bdd->exec("UPDATE ".$dbprefixe."enseignant SET nom='$nom', prenom='$prenom', identifiant='$identifiant', email='$email' WHERE id='$id'");
 
 			$_SESSION['success'][0] = 'L\'enseignant a été mis à jour avec succès !';
 			header('Location: gerer-equipe.php');
@@ -275,7 +276,7 @@ elseif(isset($_GET['supprimer_enseignant']))
 else
 {
 	echo '<input type="button" value="Ajouter des enseignants" title="Ajouter des enseignants" class="ajouter" onclick="window.location=\'gerer-equipe.php?ajouter_enseignant\';"></input><p></p>';
-	$requete = db_query("SELECT * FROM " . $dbprefixe ."enseignant ORDER BY nom, prenom ASC"); // Requête SQL
+	$requete = $bdd->query("SELECT * FROM " . $dbprefixe ."enseignant ORDER BY nom, prenom ASC"); // Requête SQL
 
 	echo '<table style="width: 100%; border-collapse: collapse; border:1px solid black;">
 				<tr style="background-color:#E6E6E6; border:1px solid black; height:30px; font-variant:small-caps;">
@@ -285,7 +286,7 @@ else
 					<th style="border:1px solid black;">Courriel</th>
 					<th style="border:1px solid black;">Actions</th>
 				</tr>';
-	while ($donnees = mysql_fetch_array($requete) )
+	while ($donnees = $requete->fetch())
 	{
 		echo '<tr><td style="border-right:1px solid black; padding:5px;">' . $donnees['prenom'] . '</td>';
 		echo '<td style="border-right:1px solid black; padding:5px;">' . $donnees['nom'] . '</td>';

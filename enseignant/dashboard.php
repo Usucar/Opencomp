@@ -23,7 +23,7 @@
 
 require_once("../core/init.php");
 
-printHead('Tableau de bord enseignant', 'enseignant', 'ifconnectfail', $dbprefixe);
+printHead('Tableau de bord enseignant', 'enseignant', 'ifconnectfail', $dbprefixe, $bdd);
 
 /* LA SUITE DE LA PAGE ENSEIGNANT ICI */
 

@@ -52,7 +52,7 @@ function VerifierAdresseMail($adresse)
 		}
 
 //Cette fonction permet d'afficher l'en-tête de la page.
-function printHead($title, $auth, $param, $dbprefixe)
+function printHead($title, $auth, $param, $dbprefixe, $bdd=null)
 {
 	$datefr = datefr();
 	

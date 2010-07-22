@@ -23,7 +23,7 @@
 
 require_once("../core/init.php");
 
-printHead('Tableau de bord administrateur', 'admin', 'ifconnectfail', $dbprefixe);
+printHead('Tableau de bord administrateur', 'admin', 'ifconnectfail', $dbprefixe, $bdd);
 
 	/* LA SUITE DE LA PAGE ADMIN ICI */
 
