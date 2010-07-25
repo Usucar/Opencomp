@@ -98,29 +98,32 @@ function printHead($title, $auth, $param, $dbprefixe, $bdd=null)
 
 
 	echo'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
-		<head>
-			<title>Opencomp | ' . $title . '</title>
-			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<link type="text/css" href="../style/style.css" rel="stylesheet" />
-			<link type="text/css" href="../style/modalbox.css" rel="stylesheet" />
-			<link  href="http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light:regular" rel="stylesheet" type="text/css" >
-			<link rel="icon" type="image/png" href="../style/img/logo.png" />
-			<script type="text/javascript" src="../library/js/prototype.js"></script>
-			<script type="text/javascript" src="../library/js/scriptaculous.js?load=builder,effects"></script>
-			<script type="text/javascript" src="../library/js/modalbox.js"></script>
-			<script type="text/javascript; charset=utf-8" src="../library/js/CheckForm.js"></script>' . "\n";
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<title>Opencomp | ' . $title . '</title>
+		
+		<link type="text/css" href="../style/style.css" rel="stylesheet" />
+		<link type="text/css" href="../style/modalbox.css" rel="stylesheet" />
+		<link  href="http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light:regular" rel="stylesheet" type="text/css" >
+		<link rel="icon" type="image/png" href="../style/img/logo.png" />
+		
+		<script type="text/javascript" src="../library/js/prototype.js"></script>
+		<script type="text/javascript" src="../library/js/scriptaculous.js?load=builder,effects"></script>
+		<script type="text/javascript" src="../library/js/modalbox.js"></script>
+		<script type="text/javascript; charset=utf-8" src="../library/js/CheckForm.js"></script>' . "\n";
 	
 	//Si on passe en paramètre de la fonction le terme 'extrajavascript', 
 	//alors le contenu de la variable $extrajavascript définie 
 	//avant l'appel de la fonction sera reproduit avant la fermeture de la balise head			
 	if(!empty($param) AND $param == 'extrajavascript')
 	{
-		echo $GLOBALS['extrajavascript'] . "\n" . ' </head>';
+		echo "\n" . '		' . $GLOBALS['extrajavascript'] . "\n" . '	</head>' . "\n\n";
 	}
 	else
 	{
-		echo "\n" . ' </head>';
+		echo '	</head>' . "\n";
 	}
 
 	//Si on a indiqué un paramètre
@@ -136,13 +139,17 @@ function printHead($title, $auth, $param, $dbprefixe, $bdd=null)
 				$bdd->exec("UPDATE " . $dbprefixe ."enseignant SET connectfail='non' WHERE identifiant='$pseudo'");
 				$_SESSION['derniere_connexion_echouee'] = 'non';
 
-				echo'<body onload="Modalbox.show($(\'attention\'), {title: \'Attention !\', width: 500});">
+				echo'	<body onload="Modalbox.show($(\'attention\'), {title: \'Attention !\', width: 500});">
 				<div id="attention" style="display:none;"><p>Il y a eu une ou plusieurs tentatives de connexions &eacute;chou&eacute;es &agrave; votre compte depuis votre derni&egrave;re visite. Si vous avez commis une erreur lors de la saisie de votre mot de passe, il n\'y a pas d\'inqui&eacute;tudes &agrave; avoir. Dans le cas contraire, nous vous sugg&eacute;rons de consulter le Journal des connexions de votre compte ...</p><p class="bottomform" style="margin-left:0px; margin-right:0px;"><input type="button" value="Consulter le journal des connexions" onclick="window.location=\'moncompte.php\';" /> <input type=\'button\' value=\'Fermer\' onclick=\'Modalbox.hide()\' /></p></div>';
 			}
 			else
 			{
-				echo'<body>';
+				echo'	<body>';
 			}
+		}
+		else
+		{
+			echo'	<body>';
 		}
 	}
 	//Sinon, on affiche un body simple

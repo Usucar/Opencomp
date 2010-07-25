@@ -42,10 +42,7 @@ $extrajavascript = <<<extrajavascript
 					check1.addReg("motdepasse2","password","required","blur","Les mots de passe ne correspondent pas",'','',['motdepasse']);
 				}
 
-
-	
-
-</script>
+		</script>
 extrajavascript;
 
 printHead('Gérer l\'équipe éducative', 'admin', 'extrajavascript', $dbprefixe, $bdd);
