@@ -158,8 +158,11 @@ function printHead($title, $auth, $param, $dbprefixe, $bdd=null)
 		echo'<body>';
 	}
 		//Puis on affiche l'en-tête
-		echo'<div id="wrap">
-		<div id="en_tete"><img class="logo_entete" src="../style/img/logo.png" alt="logo" />
+		echo "\n" . '		<div id="wrap">
+		
+			<div id="en_tete">
+			
+				<img class="logo_entete" src="../style/img/logo.png" alt="logo" />
 
 				<div class="titre_entete">Opencomp</div>
 				<div class="description_entete">Gestion de r&eacute;sultats scolaires par navigateur<span class ="description_entete" style="font-size:x-small">et bien plus encore !</span></div>
@@ -168,6 +171,7 @@ function printHead($title, $auth, $param, $dbprefixe, $bdd=null)
 					<span style="float:right;">' . $datefr . '</span><br />
 					<div style="padding-top:5px;">Bienvenue, ' .$_SESSION['prenomenseignant'] . ' ' . $_SESSION['nomenseignant'] . ' | <a href="../auth.php?logout" style="background-image: url(\'../style/img/deco.png\'); background-repeat: no-repeat; padding-left:20px;"> Se d&eacute;connecter</a></div>
 				</div>
+				
 			</div>';
 			
 			$pseudo = $_SESSION['pseudo'];
@@ -183,7 +187,7 @@ function printHead($title, $auth, $param, $dbprefixe, $bdd=null)
 			}			
 			
 			// Puis on affiche le titre de la page et (éventuellement) un avertissement sur la necessité de javascript.
-			echo'<div id="corps" class="clearfix">
+			echo "\n \t\t\t" . '<div id="corps" class="clearfix">
 			<noscript><ul style="margin:0px; padding:0px;"><li class="error">Javascript est indispensable au bon fonctionnement de Opencomp et doit être activé dans votre navigateur ! <span style="float:right;"><small>Comment faire ?</small></span></li></ul></noscript>
 			<h2>'.$title.'</h2>';
 			
@@ -198,8 +202,7 @@ function printHead($title, $auth, $param, $dbprefixe, $bdd=null)
 				
 				?>
 				
-				<script type='text/javascript'>		
-					
+				<script type='text/javascript'>					
 					
 					window.setTimeout(function() {
 						new Effect.Highlight('error', { startcolor: '#FFFFFF', endcolor: '#FFBDBD', restorecolor: '#FFE7E7',keepBackgroundImage: 'true' });
@@ -258,14 +261,14 @@ function printMenuadmin()
 	// informations sur la page
 	$info = pathinfo($_SERVER['PHP_SELF']);
 
-	$menu = "\n<div id=\"menu\">\n    <ul id=\"onglets\">\n";
+	$menu = "\n\n\t\t\t<div id=\"menu\">\n\t\t\t\t<ul id=\"onglets\">\n";
 
 
 
 	// boucle qui parcours les deux tableaux
 	foreach($tab_menu_lien as $cle=>$lien)
 	{
-	    $menu .= "    <li";
+	    $menu .= "\t\t\t\t\t<li";
 
 	    // si le nom du fichier correspond à celui pointé par l'indice, alors on l'active
 	        
@@ -283,7 +286,7 @@ function printMenuadmin()
 	    $menu .= "><a href=\"" . $lien . "\">" . $tab_menu_texte[$cle] . "</a></li>\n";
 	}
 
-	$menu .= "</ul>\n</div>";
+	$menu .= "\t\t\t\t</ul>\n\t\t\t</div>\n";
 
         // on renvoie le code xHTML
 	return $menu;
@@ -299,7 +302,7 @@ function printMenuenseignant()
 	// informations sur la page
 	$info = pathinfo($_SERVER['PHP_SELF']);
 
-	$menu = "\n<div id=\"menu\">\n    <ul id=\"onglets\">\n";
+	$menu = "\n \t \t <div id=\"menu\">\n    <ul id=\"onglets\">\n";
 
 
 

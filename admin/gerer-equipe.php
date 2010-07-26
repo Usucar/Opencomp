@@ -201,15 +201,15 @@ elseif(isset($_GET['modifier_enseignant']))
 
 	if ($_GET['id']==1)
 	{
-		$_SESSION['error'][1] = 'Il est impossible de modifier l\'administrateur !';
-		$_SESSION['error'][3236] = 'Il est impossible de modifier l\'administrateur 2 !';
+		$_SESSION['error'][] = 'Il est impossible de modifier l\'administrateur !';
+		$_SESSION['error'][] = 'Il est impossible de modifier l\'administrateur 2 !';
 
 		header('Location: gerer-equipe.php');
     }
 
 	if ($requete->rowCount() < 1)
 	{
-		$_SESSION['error'][1] = 'L\'enseignant que vous souhaitez modifier n\'existe pas !';
+		$_SESSION['error'][] = 'L\'enseignant que vous souhaitez modifier n\'existe pas !';
 		header('Location: gerer-equipe.php');
 	}
 
@@ -227,7 +227,7 @@ elseif(isset($_GET['modifier_enseignant']))
 			$id = $_GET['id'];
 			$bdd->exec("UPDATE ".$dbprefixe."enseignant SET nom='$nom', prenom='$prenom', identifiant='$identifiant', email='$email' WHERE id='$id'");
 
-			$_SESSION['success'][0] = 'L\'enseignant a été mis à jour avec succès !';
+			$_SESSION['success'][] = 'L\'enseignant a été mis à jour avec succès !';
 			header('Location: gerer-equipe.php');
 		}
 		?>
