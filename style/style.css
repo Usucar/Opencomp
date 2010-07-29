@@ -66,6 +66,19 @@ span.tooltip:hover em span {
     border: 0;
 }
 
+label {
+    display:inline-block;
+    width:100px;
+    text-align: right;
+    padding-right: 7px;
+}
+
+input[type=text],
+input[type=password] {
+    border:1px solid #cacaca;
+    margin-bottom: 8px;
+}
+
 /*************
  * L'en tête *
  *************/
