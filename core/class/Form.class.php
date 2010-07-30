@@ -26,6 +26,7 @@ class Form
 
     private $echo;
     private $errors = 0;
+    private $securedata;
 
     /**
      * Cette méthode permet d'instancier le formulaire
@@ -82,7 +83,7 @@ class Form
 
                     $this->echo[] .= ' />';
 
-		    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" /> <em><span></span>Vous devez saisir une chaine alphabétique sans accent d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
+		    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" style="vertical-align:-18%;" /> <em><span></span>Vous devez saisir une chaine alphabétique sans accent d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
 
                     $this->errors++;
 		}
@@ -102,6 +103,8 @@ class Form
                     }
 
                     $this->echo[] .= ' /><br />';
+
+                    $this->securedata[$field] = $_POST['data_'.$field];
 		}
 
 		break;
@@ -124,7 +127,7 @@ class Form
 
                     $this->echo[] .= ' />';
 
-                    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" /> <em><span></span>Vous devez saisir une chaine alphabétique d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
+                    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" style="vertical-align:-18%;" /> <em><span></span>Vous devez saisir une chaine alphabétique d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
 
                     $this->errors++;
 		}
@@ -144,6 +147,8 @@ class Form
                     }
 
                     $this->echo[] .= ' /><br />';
+
+                    $this->securedata[$field] = $_POST['data_'.$field];
 		}
 
 		break;
@@ -166,7 +171,7 @@ class Form
 
                     $this->echo[] .= ' />';
 
-                    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" /> <em><span></span>Vous devez saisir une chaine numérique d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
+                    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" style="vertical-align:-18%;" /> <em><span></span>Vous devez saisir une chaine numérique d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
 
                     $this->errors++;
 		}
@@ -186,6 +191,8 @@ class Form
                     }
 
                     $this->echo[] .= ' /><br />';
+
+                    $this->securedata[$field] = $_POST['data_'.$field];
 		}
 
 		break;
@@ -208,7 +215,7 @@ class Form
 
                     $this->echo[] .= ' />';
 
-                    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" /> <em><span></span>Vous devez saisir une adresse email valide !</em></span><br />';
+                    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" style="vertical-align:-18%;" /> <em><span></span>Vous devez saisir une adresse email valide !</em></span><br />';
 
                     $this->errors++;
 		}
@@ -228,6 +235,8 @@ class Form
                     }
 
                     $this->echo[] .= ' /><br />';
+
+                    $this->securedata[$field] = $_POST['data_'.$field];
 		}
 
 		break;
@@ -250,7 +259,7 @@ class Form
 
                     $this->echo[] .= ' />';
 
-                    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" /> <em><span></span>Vous devez saisir un mot de passe d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
+                    $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" style="vertical-align:-18%;" /> <em><span></span>Vous devez saisir un mot de passe d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
 
                     $this->errors++;
 		}
@@ -270,6 +279,8 @@ class Form
                     }
 
                     $this->echo[] .= ' /><br />';
+
+                    $this->securedata[$field] = $_POST['data_'.$field];
 		}
 
 		break;                                
@@ -283,6 +294,11 @@ class Form
             }
 
             $this->echo[] = '<input type="text" name="data_'.$field.'" id="form_'.$field.'" ';
+
+            if(!empty ($value))
+            {
+                $this->echo[] .= 'value="' . $value . '" ';
+            }
 
              if(!empty ($javascript))
             {
@@ -313,7 +329,7 @@ class Form
                 }
 
                 $this->echo[] = '<input type="password" name="data_'.$field.'" id="form_'.$field.'" value="'.$_POST['data_'.$field].'" />';
-                $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" /> <em><span></span>Vous devez saisir une chaine alphabétique sans accent d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
+                $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" style="vertical-align:-18%;" /> <em><span></span>Vous devez saisir une chaine alphabétique sans accent d\'une longueur minimale de '.$longueur_mini.' caractère(s) !</em></span><br />';
 
                 $this->errors++;
             }
@@ -359,7 +375,7 @@ class Form
                         }
 
                         $this->echo[] = '<input type="password" name="data_'.$field.'" id="form_'.$field.'" value="'.$_POST['data_'.$field].'" />';
-                        $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" /> <em><span></span>Ce champ ne correspond pas avec le champ précédent !</em></span><br />';
+                        $this->echo[] = '<span class="tooltip"><img src="../style/img/error.png" style="vertical-align:-18%;" /> <em><span></span>Ce champ ne correspond pas avec le champ précédent !</em></span><br />';
 
                         $this->errors++;
                 }
@@ -398,6 +414,19 @@ class Form
 	{
             return true;
 	}
+    }
+
+    /**
+     * Cette méthode permet d'obtenir les valeurs envoyées dans les champs de formulaires après les avoir sécurisé.
+     *
+     * @return mixed
+     */
+    public function getsecuredata($field)
+    {
+        if (isset ($this->securedata[$field]))
+        {
+            return htmlspecialchars($this->securedata[$field]);
+        }
     }
 
     /**
