@@ -589,6 +589,7 @@ elseif (isset($_GET['step5']))
 									try 
 									{
 										$bdd = new PDO(DSN1, USER1, PASS1);
+										$bdd->exec('SET CHARACTER SET utf8');
 										$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 									}
 									catch (PDOException $e)
@@ -600,9 +601,9 @@ elseif (isset($_GET['step5']))
 									//On vérifie qu'il n'existe pas déjà un administrateur
 
 									$reponse = $bdd->query("SELECT identifiant FROM ".$dbprefixe."enseignant WHERE identifiant ='admin'");
-
+																																				
 									if ($reponse->rowCount() == 1)
-									{
+									{										
 										exit('<ul><li class="error">Un identifiant administrateur a déjà été créé pour cette installation d\'Opencomp !</li></ul>
 										<p>Par mesure de sécurité, il n\'est pas possible de créer un second compte administrateur.</p>
 										<p class="bottomform" style="margin-bottom:0px;"><a href="index.php?step5">Retour</a></p>');
