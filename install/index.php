@@ -611,11 +611,11 @@ elseif (isset($_GET['step5']))
 									{
 										//On définit un grain de sel pour l'utilisateur aléatoirement et on hâche le mot de passe.
 										$graindesel = rand();
-										$hashmotdepasse = sha1(mysql_real_escape_string($_POST['passadmin']).$graindesel);
+										$hashmotdepasse = sha1($_POST['passadmin'].$graindesel);
 
-										$nomadmin = mysql_real_escape_string($_POST['nomadmin']);
-										$prenomadmin = mysql_real_escape_string($_POST['prenomadmin']);
-										$emailadmin = mysql_real_escape_string($_POST['emailadmin']);
+										$nomadmin = $_POST['nomadmin'];
+										$prenomadmin = $_POST['prenomadmin'];
+										$emailadmin = $_POST['emailadmin'];
 
 										//Pour pouvoir manipuler les accents sans problème, utf8
 										
