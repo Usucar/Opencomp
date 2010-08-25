@@ -337,7 +337,7 @@ form .submit input[type=submit]:hover {
 }
 
 /** Notices and Errors **/
-div.message {
+/*div.message {
 	clear: both;
 	color: #fff;
 	font-size: 140%;
@@ -380,7 +380,7 @@ p.error em {
 	background: green;
 	color: #fff;
 }
-
+*/
 /**  Actions  **/
 div.actions ul {
 	margin: 0;

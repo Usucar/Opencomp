@@ -6,7 +6,7 @@
 
 echo '<p>'.$paginator->numbers().'</p><ul>';
 
-echo 'Vous êtes connecté en tant que '.$session->read('Auth.User.username');
+echo '<li>Vous êtes connecté en tant que '.$session->read('Auth.User.username').'</li></ul>';
 
 echo '<table>';
 

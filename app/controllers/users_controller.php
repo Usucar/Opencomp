@@ -8,16 +8,12 @@ class UsersController extends AppController{
         'User' => array(
             'limit' => 10,
             'order' => array(
-                'User.nom' => 'Asc'
+                'User.nom' => 'Asc',
+                'User.prenom' => 'Asc'
             )
         )
     );
 
-    function index()
-    {
-        $q = $this->paginate('User');
-        $this->set('listedesutilisateurs', $q);
-    }
 
     function beforeFilter()
     {
@@ -25,6 +21,14 @@ class UsersController extends AppController{
         $this->Auth->allow('login');
     }
 
+
+    function index()
+    {
+        $q = $this->paginate('User');
+        $this->set('listedesutilisateurs', $q);
+    }
+
+    
     //Fonction permettant d'éditer
     function edit($id = null)
     {
@@ -43,7 +47,7 @@ class UsersController extends AppController{
             {
                 if (!empty($this->data['User']['id']))
                 {
-                    $this->Session->setFlash('L\'utilisateur a été édité avec succès !');
+                    $this->Session->setFlash('L\'utilisateur a été édité avec succès !', 'message_succes');
                     $this->redirect('index');
                 }
                 else

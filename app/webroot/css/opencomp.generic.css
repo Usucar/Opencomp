@@ -1,0 +1,36 @@
+.message {
+	font-size: 12px;
+	border-width: 1px;
+	border-style: solid;
+	padding-left: 65px;
+	margin-top: 0px;
+	min-height: 47px;
+	background-repeat: no-repeat;
+	background-position: 15px 6px;
+	padding-top: 7px;
+        margin-bottom: 10px;
+}
+
+.succes {
+	border-color: #739f1d;
+	background-image: url(../img/tick.png);
+	background-color: #d4f684;
+}
+
+.message_texte {
+
+	font-family: "Trebuchet MS", "Lucida Grande", Verdana, Arial, sans-serif;
+	margin-top: 6px;
+	font-size: 13px;
+
+}
+
+.title_succes {
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	color: #739f1d;
+	font-size: 13px;
+	font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+
+}
+
