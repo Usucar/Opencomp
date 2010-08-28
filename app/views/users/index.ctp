@@ -1,12 +1,8 @@
-<h1>Liste des utilisateurs</h1>
-
 <?php echo $html->link('Ajouter un utilisateur',array('controller'=>'users', 'action'=>'edit')); ?>
 
 <?php
 
-echo '<p>'.$paginator->numbers().'</p><ul>';
-
-echo '<li>Vous êtes connecté en tant que '.$session->read('Auth.User.username').'</li></ul>';
+echo '<p>'.$paginator->numbers().'</p>';
 
 echo '<table>';
 

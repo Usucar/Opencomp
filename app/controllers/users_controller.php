@@ -19,6 +19,7 @@ class UsersController extends AppController{
     {
         parent::beforeFilter();
         $this->Auth->allow('login');
+        $this->set('title_for_layout', 'Liste des utilisateurs');
     }
 
 
@@ -52,13 +53,13 @@ class UsersController extends AppController{
                 }
                 else
                 {
-                    $this->Session->setFlash('L\'utilisateur a été ajouté avec succès !');
+                    $this->Session->setFlash('L\'utilisateur a été ajouté avec succès !', 'message_succes');
                     $this->redirect('index');
                 }
             }
             else
             {
-                $this->Session->setFlash('Corrigez les erreurs mentionnées');
+                $this->Session->setFlash('Corrigez les erreurs mentionnées', 'message_attention');
             }
 
         }
@@ -71,13 +72,13 @@ class UsersController extends AppController{
         
         if ($utilisateur['User']['role'] == 'admin' && $nb_admin == 1)
         {
-            $this->Session->setFlash('Vous devez conserver au moins un administrateur pour gérer les utilisateurs !');
+            $this->Session->setFlash('Vous devez conserver au moins un administrateur pour gérer les utilisateurs !', 'message_erreur');
             $this->redirect('index');
         }
         else
         {
             $this->User->delete($id);
-            $this->Session->setFlash('L\'utilisateur a été correctement supprimé !');
+            $this->Session->setFlash('L\'utilisateur a été correctement supprimé !', 'message_succes');
             $this->redirect('index');
         }
         

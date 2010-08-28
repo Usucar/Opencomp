@@ -10,6 +10,8 @@
 
 		echo $this->Html->css('cake.generic');
 
+                echo $this->Html->css('opencomp.generic');
+
 		echo $scripts_for_layout;
 	?>
 </head>
