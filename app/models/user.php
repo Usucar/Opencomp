@@ -9,6 +9,10 @@ class User extends AppModel{
 			'rule' => array('minLength', 1),
                         'message' => 'Taille minimum de 1 caractère'
 		),
+                'username' => array(
+			'rule' => 'alreadyExist',
+                        'message' => 'Ce pseudo existe déjà.'
+		),
                 'passwrd' => array(
 			'rule' => array('minLength', 6),
                         'required' => true,
@@ -37,6 +41,20 @@ class User extends AppModel{
                 return false;
         }
 
+        function alreadyExist($data)
+        {
+            $username_already_exist = $this->find('count', array('conditions' => array('User.username' => $this->data[$this->alias]['username'])));
+
+            if ($username_already_exist == 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         function beforeSave()
         {        
             // On indique que passwrd correspond en fait à password.
@@ -62,7 +80,7 @@ class User extends AppModel{
             }
             
         return true;
-    }
+        }
 }
 
 ?>

@@ -25,7 +25,7 @@
 			
 
 		</div>
-		<div id="footer">
+		<div id="baspage">
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>

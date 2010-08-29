@@ -60,3 +60,6 @@
 2010-08-22 23:34:51 Notice: Notice (8): Undefined variable: url in [/Users/jean/Sites/opencomp/cake/libs/controller/controller.php, line 979]
 2010-08-22 23:46:38 Notice: Notice (8): Undefined property: AuthComponent::$Acl in [/Users/jean/Sites/opencomp/cake/libs/controller/components/auth.php, line 527]
 2010-08-25 21:41:39 Notice: Notice (8): Undefined variable: content_for_layout in [/Users/jean/Sites/opencomp/app/views/elements/message_succes.ctp, line 4]
+2010-08-29 22:54:44 Debug: Notice (8): Undefined property: User::$User in [C:\wamp\www\opencomp\app\models\user.php, line 51]
+2010-08-29 22:55:14 Debug: Notice (8): Undefined property: User::$Session in [C:\wamp\www\opencomp\app\models\user.php, line 55]
+2010-08-29 23:02:09 Debug: Notice (8): Undefined property: User::$Session in [C:\wamp\www\opencomp\app\models\user.php, line 55]

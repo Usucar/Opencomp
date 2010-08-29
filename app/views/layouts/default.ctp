@@ -18,9 +18,9 @@
     
     <div id="wrap">
                 
-        <div id="en_tete">
+        <div id="en_tete">                
 
-                <img class="logo_entete" src="img/logo.png" alt="logo" />
+                <?php echo $html->image('logo.png', array('alt' => 'Opencomp', 'class' => 'logo_entete'))?>
 
                 <div class="titre_entete">Opencomp</div>
                 <div class="description_entete">Gestion de r&eacute;sultats scolaires par navigateur<span class ="description_entete" style="font-size:x-small">et bien plus encore !</span></div>
