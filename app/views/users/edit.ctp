@@ -18,7 +18,7 @@ if (!empty($this->data['User']['id']))
 }
 
 echo $form->input('User.passwrd', array('label'=>'Mot de passe', 'type'=>'password'));
-echo $form->input('User.passwrd2', array('label'=>'Mot de passe', 'type'=>'password'));
+echo $form->input('User.passwrd2', array('label'=>'Confirmez le mot de passe', 'type'=>'password'));
 echo $form->hidden('User.id');
 
 $options=array('enseignant'=>'Enseignant','admin'=>'Administrateur');

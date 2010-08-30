@@ -6,13 +6,15 @@ class User extends AppModel{
 
         var $validate = array(
 		'username' => array(
+                    'longueur' => array(
 			'rule' => array('minLength', 1),
                         'message' => 'Taille minimum de 1 caractère'
-		),
-                'username' => array(
+                    ),
+                    'donotalreadyexist' => array(
 			'rule' => 'alreadyExist',
-                        'message' => 'Ce pseudo existe déjà.'
-		),
+                        'message' => 'Le nom d\'utilisateur que vous avez indiqué est déjà utilisé, choisissez en un autre.'
+                    )
+		),               
                 'passwrd' => array(
 			'rule' => array('minLength', 6),
                         'required' => true,
