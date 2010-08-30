@@ -14,17 +14,16 @@ class UsersController extends AppController{
         )
     );
 
-
     function beforeFilter()
     {
         parent::beforeFilter();
         $this->Auth->allow('login');
-        $this->set('title_for_layout', 'Liste des utilisateurs');
     }
 
 
     function index()
     {
+        $this->set('title_for_layout', 'Liste des utilisateurs');
         $q = $this->paginate('User');
         $this->set('listedesutilisateurs', $q);
     }
@@ -39,6 +38,16 @@ class UsersController extends AppController{
         {
             $this->User->id = $id;
             $this->data = $this->User->read();
+
+             if (!empty($this->data['User']['id']))
+            {
+                $this->set('title_for_layout', 'Modifier un utilisateur');
+            }
+            else
+            {
+                $this->set('title_for_layout', 'Ajouter un utilisateur');
+            }
+
         }
         else
         {
@@ -94,7 +103,7 @@ class UsersController extends AppController{
         // page de login et on le redirige vers un module au choix !
         $user = $this->Auth->user();
         if (isset($user))
-        $this->redirect(array('controller'=>'utilisateurs', 'action'=>'index'));
+        $this->redirect(array('controller'=>'users', 'action'=>'index'));
     }
 
     function logout()

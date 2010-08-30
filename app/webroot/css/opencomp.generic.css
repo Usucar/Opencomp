@@ -95,9 +95,11 @@
  * Réinitialisation des marges et classes partagées *
  ****************************************************/
 
-body
+html, body
 {
-	margin:0px;
+	margin:0;
+        padding:0;
+        height:100%;
 }
 
 .majuscule
@@ -205,6 +207,7 @@ input[type=password] {
 	margin:20px;
 	font-size: 80%;
 	color:#777777;
+        margin-right: 20%;
 }
 
 #corps h2
@@ -452,7 +455,6 @@ body > #wrap {height: auto; min-height: 100%;}
 table {
 	background: #fff;
 	border-right:0;
-	clear: both;
 	color: #333;
 	margin-bottom: 10px;
 	width: 100%;
@@ -505,4 +507,25 @@ table td.actions a {
 }
 .cake-sql-log caption {
 	color:#fff;
+}
+
+img {
+    border: 0 none;
+}
+
+#menu
+{
+   width: 17%;
+   background-color: #F5F5F5;
+   border-bottom-color: #F5F5F5;
+   padding-left: 18px;
+   position:absolute;
+   right:0px;
+   top:111px;
+   height:76%; 
+}
+
+#wraper
+{
+    height: 100%;
 }
