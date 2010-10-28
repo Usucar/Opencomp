@@ -79,7 +79,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => 'caketest',
+		'database' => 'opencomp',
 		'encoding'=> 'utf8',
 		'prefix' => '',
 	);
