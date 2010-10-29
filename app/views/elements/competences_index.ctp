@@ -2,16 +2,54 @@
 
 $id = $data['Competence']['id'];
 ?>
-<?php e($data['Competence']['libelle']); ?> <?php e($html->link('Monter', 'move_up/'.$id)); ?>&nbsp;
-<?php e($html->link('Descendre', 'move_down/'.$id)); ?>&nbsp;
-<?php e($html->link("Modifier", 'edit/'.$id)); ?>&nbsp;
-<?php e($html->link("Supprimer", 'delete/'.$id, null, "Etes-vous sûr ?")); ?>&nbsp;
+<?php e($data['Competence']['libelle']); ?> 
+<?php e($html->image('up.png', array(
+            'alt' => 'Monter',
+            'url' => array('action' => 'move_up',$id)))); ?>&nbsp;
+<?php e($html->image('down.png', array(
+            'alt' => 'Descendre',
+            'url' => array('action' => 'move_down',$id)))); ?>&nbsp;
+<?php e($html->image('edit.png', array(
+            'alt' => 'Modifier',
+            'url' => array('action' => 'edit',$id)))); ?>&nbsp;
+<?php e($html->image('delete.png', array(
+            'onclick' => 'return confirm(\'Voulez vous vraiment supprimer cette catégorie de compétence ?\');',
+            'alt' => 'Supprimer',
+            'url' => array('action' => 'delete',$id)))); ?>&nbsp;
 <br />
 <?php
-foreach ($items as $i){
-    if ($i['Items']['id-competence'] == $id)
+
+/**
+ * On récupère depuis competences_controller l'ensemble des catégories de
+ * compétences avec les compétences qui leurs sont associées sous forme de
+ * tableau imbriqués.
+ */
+
+//debug($items);
+
+echo '<ul>';
+if (isset ($items[$id]))
+{
+    foreach ($items[$id] as $competence => $type)
     {
-        echo $i['Items']['intitule'];
+        switch ($type)
+        {
+            case 1:
+            echo '<li>'.$competence.' (Instructions officielles)</li>';
+            break;
+
+            case 2:
+            echo '<li>'.$competence.' (Compétence établissement)</li>';
+            break;
+
+            case 3:
+            echo '<li>'.$competence.' (Compétence enseignant)</li>';
+            break;
+
+            default:
+            echo '<li>'.$competence.'</li>';
+        }
     }
 }
+echo '</ul>'
 ?>

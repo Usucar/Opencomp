@@ -3,12 +3,9 @@
 class ItemsController extends AppController
 {
 
-        // Appel du Helper Tree
-	var $helpers = array ('Tree');
-
 	function edit($id = null)
         {
-                $this->set('title_for_layout', 'Ajouter une compétence');
+                $this->set('title_for_layout', 'Ajouter/Modifier une compétence');
                 
                 if(isset($this->data))
                 {
@@ -20,7 +17,7 @@ class ItemsController extends AppController
                 $this->data = $this->Item->read(null, $id);
 
                 // Passage de la liste à la Vue :
-		$this->set('competences', $this->Item->Competence->generatetreelist());
+		$this->set('competences', $this->Item->Competence->generatetreelist(null, null, null, '_____'));
 
 	}
 

@@ -17,8 +17,9 @@ class CompetencesController extends AppController
 
 		$this->set(compact('categories'));
 
-                $i = $this->Competence->Items->find('all', array(
-                    'fields' => array('intitule', 'id-competence')
+                $i = $this->Competence->Item->find('list', array(
+                    'fields' => array('intitule', 'type', 'competence_id'),
+                    'order' => array('Item.competence_id','Item.place')
                 ));
                 $this->set('items',$i);
 	}
