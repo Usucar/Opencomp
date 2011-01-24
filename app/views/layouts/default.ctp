@@ -10,6 +10,7 @@
 		echo $this->Html->meta('icon');
 		//echo $this->Html->css('cake.generic');
                 echo $this->Html->css('opencomp.generic');
+				echo $this->Html->css('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
                   
 		echo $scripts_for_layout;
 	?>

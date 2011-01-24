@@ -53,6 +53,27 @@
 	background-color: #FDCEA4;
 }
 
+.error{
+	padding: 10px;
+	color:#FFF;
+	font-size:14px;
+	background-color: #C00;
+}
+
+pre{
+	padding:10px;
+	background-color:#E5E5E5;
+	font-size:14px;
+	color:#000; 
+}
+
+.notice{
+	padding: 10px;
+	color:#FFF;
+	font-size:14px;
+	background-color:#606;
+}
+
 .title_erreur {
 	padding-bottom: 0px;
 	margin-bottom: 0px;
@@ -213,6 +234,7 @@ input[type=password] {
 #corps h2
 {
 	text-align:center;
+	font-family:Ubuntu, Verdana, Geneva, sans-serif;
 }
 
 .checkform-error
