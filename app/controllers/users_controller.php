@@ -33,13 +33,16 @@ class UsersController extends AppController{
     function edit($id = null)
     {
 
-        // Si le formulaire n'a pas été rempli on tente de le préremplir avec l'id fourni dans le champ hidden
+        //Si le formulaire n'a pas été rempli on tente de le préremplir         
+        //avec l'id fourni dans le champ hidden
         if (empty($this->data))
         {
             $this->User->id = $id;
             $this->data = $this->User->read();
-
-             if (!empty($this->data['User']['id']))
+			
+            //Petite attention, on distingue la modification de l'ajout même
+            //si une seule méthode effectue les deux opérations.
+            if (!empty($this->data['User']['id']))
             {
                 $this->set('title_for_layout', 'Modifier un utilisateur');
             }
@@ -51,8 +54,9 @@ class UsersController extends AppController{
         }
         else
         {
-            // Si le formulaire est rempli, on sauve les données si elles sont valides, et on affiche une
-            // confirmation, sinon, on affiche un avertissement invitant les personnes à corriger leur saisie.
+            // Si le formulaire est rempli, on sauve les données si elles sont 
+            // valides, et on affiche une confirmation, sinon, on affiche un 
+            // avertissement invitant les personnes à corriger leur saisie.
             if ($this->User->save($this->data))
             {
                 if (!empty($this->data['User']['id']))
@@ -68,6 +72,17 @@ class UsersController extends AppController{
             }
             else
             {
+				//Petite attention, on distingue la modification de l'ajout même
+				//si une seule méthode effectue les deux opérations.
+				if (!empty($this->data['User']['id']))
+				{
+					$this->set('title_for_layout', 'Modifier un utilisateur');
+				}
+				else
+				{
+					$this->set('title_for_layout', 'Ajouter un utilisateur');
+				}
+				
                 $this->Session->setFlash('Corrigez les erreurs mentionnées', 'message_attention');
             }
 

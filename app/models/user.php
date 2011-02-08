@@ -4,37 +4,66 @@ class User extends AppModel{
 	
 	var $name="User";
 
-        var $validate = array(
+	var $validate = array(
 		'username' => array(
-                    'longueur' => array(
-			'rule' => array('minLength', 1),
-                        'message' => 'Taille minimum de 1 caractère'
-                    ),
-                    'donotalreadyexist' => array(
-			'rule' => 'alreadyExist',
-                        'message' => 'Le nom d\'utilisateur que vous avez indiqué est déjà utilisé, choisissez en un autre.'
-                    )
+			'longueur' => array(
+				'rule' => array('minLength', 5),
+				'message' => 'Taille minimum de 5 caractères'
+			),
+			'unique_create' => array(
+                            'rule' => 'isUnique',
+                            'on' => 'create',
+                            'message' => 'Le nom d\'utilisateur saisi n\'est pas disponible, veuillez en choisir un autre !'
+                        ),
+                        'unique_update' => array(
+                            'rule' => 'isUniqueUpdate',
+                            'on' => 'update',
+                            'message' => 'Le nom d\'utilisateur saisi n\'est pas disponible, veuillez en choisir un autre !'
+                        )
 		),               
+            
                 'passwrd' => array(
-			'rule' => array('minLength', 6),
+                        'rule' => array('minLength', 6),
                         'required' => true,
                         'allowEmpty' => true,
                         'on'=>'update',
-                        'message' => 'Ce champ est requis !'
-		),
+                        'message' => 'Taille minimum de 6 caractères !'
+                ),
                 'passwrd' => array(
-			'rule' => array('minLength', 6),
+                        'rule' => array('minLength', 6),
                         'required' => true,
                         'allowEmpty' => false,
                         'on'=>'create',
-                        'message' => 'Ce champ est requis !'
-		),
+                        'message' => 'Taille minimum de 6 caractères !'
+                ),
                 'passwrd2' => array(
-			'rule' => 'checkPasswords',
+                        'rule' => 'checkPasswords',
                         'message' => 'Les mots de passe ne correspondent pas !'
-		)               
-	);
+                ),
+            
+                'prenom' => array(
+                        'rule' => array('minLength', 2),
+                        'required' => true,
+                        'allowEmpty' => false,
+                        'message' => 'Vous devez compléter ce champs !'
+                ),
+            
+                'nom' => array(
+                        'rule' => array('minLength', 2),
+                        'required' => true,
+                        'allowEmpty' => false,
+                        'message' => 'Vous devez compléter ce champs !'
+                ),
+                
+                //La validation de l'hôte de l'adresse email ralenti énormément, 
+                //le traitement. L'option est desactivé desormais.                
+                'email' => array(
+                        'rule' => array('email', false),
+                        'message' => 'Merci de soumettre une adresse email valide.'
+                )
+);
 
+        //Cette fonction vérifie que les deux mots de passes saisis sont identiques        
         function checkPasswords($data)
         {
             if ($this->data[$this->name]['passwrd'] == $this->data[$this->name]['passwrd2'])
@@ -43,18 +72,21 @@ class User extends AppModel{
                 return false;
         }
 
-        function alreadyExist($data)
+        //Cette fonction permet de vérifier que l'utilisateur ne saisi pas un
+        //nom d'utilisateur déjà existant mais exclut de la vérification 
+        //le nom d'utilisateur actuel de l'utilisateur.
+        function isUniqueUpdate($data)
         {
-            $username_already_exist = $this->find('count', array('conditions' => array('User.username' => $this->data[$this->alias]['username'])));
-
-            if ($username_already_exist == 1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !$this->find(
+                'count',
+                array(
+                    'conditions' => array(
+                        $data,
+                        "id != {$this->data[$this->alias]['id']}" 
+                    ),
+                    'recursive' => -1
+                )
+            );
         }
 
         function beforeSave()
@@ -62,16 +94,19 @@ class User extends AppModel{
             // On indique que passwrd correspond en fait à password.
             $this->data[$this->alias]['password'] = $this->data[$this->alias]['passwrd'];
 
-            // Si le champ password n'est pas vide, c'est qu'il a été modifié. Alors, on l'encrypte.
+            // Si le champ password n'est pas vide, c'est qu'il a été modifié. 
+            // Alors, on l'encrypte.
             if(!empty($this->data[$this->alias]['password']))
             {
                 $this->data[$this->alias]['password'] = Security::hash($this->data[$this->alias]['password'], null, true);
             }
 
-            // Si on a récupéré un champ Id du formulaire, c'est que la personne est en train d'éditer un enregistrement.
+            // Si on a récupéré un champ Id du formulaire, c'est que la personne
+            // est en train d'éditer un enregistrement.
             if (isset($this->data[$this->alias]['id']))
             {
-                // Si le champ password n'a pas été complété, on fait en sorte de récupérer le hash à partir de la BDD
+                // Si le champ password n'a pas été complété, on fait en sorte 
+                // de récupérer le hash à partir de la BDD.
                 if (empty($this->data[$this->alias]['password']))
                 {
                     $utilisateur = $this->findById($this->data[$this->alias]['id']);

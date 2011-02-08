@@ -17,7 +17,7 @@ class ItemsController extends AppController
                 $this->data = $this->Item->read(null, $id);
 
                 // Passage de la liste à la Vue :
-		$this->set('competences', $this->Item->Competence->generatetreelist(null, null, null, '_____'));
+				$this->set('competences', $this->Item->Competence->generatetreelist(null, null, null, '_____'));
 
 	}
 

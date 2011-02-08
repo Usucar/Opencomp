@@ -42,7 +42,7 @@
                 </div>
 
         </div>
-
+<!--
         <div id="menu">
                 <div class="element_menu">
                <h3>Titre menu</h3>
@@ -62,6 +62,8 @@
                </ul>
            </div>
             </div>
+
+-->
         
         <div id="corps" class="clearfix">
 
@@ -76,7 +78,7 @@
     </div>
 
     <div id="footer">
-        <p style='position:relative; top:7px; left:10px;'>Opencomp est distribué sous licence <a href ='http://www.april.org/gnu/gpl_french.html'>GNU/GPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'>Forge du projet Opencomp</a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'>rapporter une anomalie</a></p><div style='float:right; position:relative; bottom:18px; right:10px;'>Page générée en $tps seconde requêtes exécutées.</div>
+        <p style='position:relative; top:7px; left:10px;'>Opencomp est distribué sous licence <a href ='http://www.gnu.org/licenses/agpl-3.0-standalone.html'>GNU/AGPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'>Forge du projet Opencomp</a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'>rapporter une anomalie</a></p><div style='float:right; position:relative; bottom:18px; right:10px;'>Page générée en $tps seconde requêtes exécutées.</div>
 
     </div>
     

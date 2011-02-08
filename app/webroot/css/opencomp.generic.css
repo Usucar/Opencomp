@@ -8,7 +8,7 @@
 	background-repeat: no-repeat;
 	background-position: 15px 8px;
 	padding-top: 7px;
-        margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .message_texte {
@@ -17,6 +17,35 @@
 	margin-top: 6px;
 	font-size: 13px;
 
+}
+
+.error-message {
+	background-color:#930;
+	border-radius:10px;
+	-moz-border-radius:10px 10px 10px 10px;
+	-webkit-border-radius:10px 10px 10px 10px;
+	color:#FFF;
+	padding:3px;
+	font-size:80%;
+	display:inline;
+	padding-right:10px;
+	padding-left:10px;
+	margin-left:10px;
+}
+
+.info-message {
+	background-color:#70A9E2;
+	border-radius:10px;
+	-moz-border-radius:10px 10px 10px 10px;
+	-webkit-border-radius:10px 10px 10px 10px;
+	color:#FFF;
+	padding:3px;
+	font-size:80%;
+	display:inline;
+	padding-right:10px;
+	padding-left:10px;
+	margin-left:10px;
+	margin-bottom:10px;
 }
 
 .succes {
@@ -58,20 +87,48 @@
 	color:#FFF;
 	font-size:14px;
 	background-color: #C00;
+	border-radius:10px;
+	-moz-border-radius:10px 10px 10px 10px;
+	-webkit-border-radius:10px 10px 10px 10px;
+}
+
+.input{
+	color:inherit;
+	background-color:inherit;
+	font-size:inherit;
+	padding:inherit;
+	border-radius:0px;
+	-moz-border-radius:0px;
+	-webkit-border:0px;
+}
+
+input[type="submit"]{
+	margin-top:20px;
 }
 
 pre{
 	padding:10px;
 	background-color:#E5E5E5;
 	font-size:14px;
-	color:#000; 
+	color:#000;
+	border-radius:10px 10px 10px 10px;
+	-moz-border-radius:10px 10px 10px 10px;
+	-webkit-border-radius:10px 10px 10px 10px;
 }
 
 .notice{
+	display:block;
 	padding: 10px;
 	color:#FFF;
 	font-size:14px;
 	background-color:#606;
+	border-radius:10px 10px 10px 10px;
+	-moz-border-radius:10px 10px 10px 10px;
+	-webkit-border-radius:10px 10px 10px 10px;
+}
+
+.success{
+	background-color:#060;	
 }
 
 .title_erreur {
@@ -228,7 +285,7 @@ input[type=password] {
 	margin:20px;
 	font-size: 80%;
 	color:#777777;
-        margin-right: 20%;
+    margin-right: 20%;
 }
 
 #corps h2
@@ -432,7 +489,10 @@ html, body, #wrap {height: 100%;}
 
 body > #wrap {height: auto; min-height: 100%;}
 
-#corps {padding-bottom: 55px;}  /* must be same height as the footer */
+#corps {
+	/* Augmenter cette valeur permet d'obtenir une marge entre le corps et le footer */
+	padding-bottom: 75px;
+}  
 
 #footer
 {
