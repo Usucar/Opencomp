@@ -1,8 +1,11 @@
-# Lisez-moi Opencomp
+Lisez-moi Opencomp
+================================
 
-## Instructions d'installation
+Instructions d'installation
+---------------------------
 
 Pour installer Opencomp, suivez les indications suivantes :
+
 * Téléchargez la dernière version du script [ici](https://github.com/jtraulle/Opencomp/zipball/master)
 * Décompressez le dossier
 * Transférez le dossier sur votre serveur web
