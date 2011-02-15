@@ -12,7 +12,6 @@ Pour installer Opencomp, suivez les indications suivantes :
 * Assurez vous que le Module de réécriture d'URL Apache est activé sur votre serveur
 * Créer une base de donnée MySQL en important le dump SQL suivant :
 
-<pre>
     -- phpMyAdmin SQL Dump
     -- version 3.2.4
     -- http://www.phpmyadmin.net
@@ -189,7 +188,6 @@ Pour installer Opencomp, suivez les indications suivantes :
 
     INSERT INTO `users` (`id`, `username`, `password`, `prenom`, `nom`, `email`, `role`) VALUES
     (2, 'admin', '70454af0546c3c5390733ee0030c0812fe61f61b', 'Administrateur', 'de test', 'admin@test.me', 'admin');
-</pre>
 
 * Vérifiez que les informations de connexion présentes dans le fichier `app\config\database.php` (line 76).
 * Les identifiants de connexion par défaut sont **admin** pour l'identifiant et **testons** pour le mot de passe.
