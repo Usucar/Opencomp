@@ -42,28 +42,13 @@
                 </div>
 
         </div>
-<!--
-        <div id="menu">
-                <div class="element_menu">
-               <h3>Titre menu</h3>
-               <ul>
-                   <li><a href="page1.html">Lien</a></li>
-                   <li><a href="page2.html">Lien</a></li>
-                   <li><a href="page3.html">Lien</a></li>
-               </ul>
-           </div>
-
-           <div class="element_menu">
-               <h3>Titre menu</h3>
-               <ul>
-                   <li><a href="page4.html">Lien</a></li>
-                   <li><a href="page5.html">Lien</a></li>
-                   <li><a href="page6.html">Lien</a></li>
-               </ul>
-           </div>
-            </div>
-
--->
+       
+        <ul id="tabnav">
+            <li class="tab1"><a href="http://localhost/opencomp/">Tableau de bord</a></li>
+            <li class="tab2"><a href="index2.html">Tab Two</a></li>
+            <li class="tab3"><a href="index3.html">Tab Three</a></li>
+            <li class="tab4"><a href="index4.html">Tab Four</a></li>        
+        </ul>
         
         <div id="corps" class="clearfix">
 
