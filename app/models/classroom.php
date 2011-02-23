@@ -9,14 +9,6 @@ class Classroom extends AppModel {
 			'className' => 'Pupil',
 			'foreignKey' => 'classroom_id',
 			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
 		)
 	);
 

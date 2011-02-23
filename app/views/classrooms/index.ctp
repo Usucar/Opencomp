@@ -1,10 +1,8 @@
 <div class="classrooms index">
-	<h2><?php __('Classrooms');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('title');?></th>
-			<th><?php echo $this->Paginator->sort('created');?></th>
+			<th><?php echo $this->Paginator->sort('Classe','title');?></th>
+			<th><?php echo $this->Paginator->sort('Date de création','created');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -16,7 +14,6 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $classroom['Classroom']['id']; ?>&nbsp;</td>
 		<td><?php echo $classroom['Classroom']['title']; ?>&nbsp;</td>
 		<td><?php echo $classroom['Classroom']['created']; ?>&nbsp;</td>
 		<td class="actions">

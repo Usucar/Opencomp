@@ -1,13 +1,11 @@
 <div class="pupils index">
-	<h2><?php __('Pupils');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('nom');?></th>
-			<th><?php echo $this->Paginator->sort('prenom');?></th>
-			<th><?php echo $this->Paginator->sort('sexe');?></th>
-			<th><?php echo $this->Paginator->sort('date-de-naissance');?></th>
-			<th><?php echo $this->Paginator->sort('classroom_id');?></th>
+			<th><?php echo $this->Paginator->sort('Nom','nom');?></th>
+			<th><?php echo $this->Paginator->sort('Prénom','prenom');?></th>
+			<th><?php echo $this->Paginator->sort('Sexe','sexe');?></th>
+			<th><?php echo $this->Paginator->sort('Date de naissance','date-de-naissance');?></th>
+			<th><?php echo $this->Paginator->sort('Classe','classroom_id');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -18,8 +16,7 @@
 			$class = ' class="altrow"';
 		}
 	?>
-	<tr<?php echo $class;?>>
-		<td><?php echo $pupil['Pupil']['id']; ?>&nbsp;</td>
+	<tr<?php echo $class;?>>		
 		<td><?php echo $pupil['Pupil']['nom']; ?>&nbsp;</td>
 		<td><?php echo $pupil['Pupil']['prenom']; ?>&nbsp;</td>
 		<td><?php echo $pupil['Pupil']['sexe']; ?>&nbsp;</td>
@@ -30,7 +27,7 @@
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $pupil['Pupil']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $pupil['Pupil']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $pupil['Pupil']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $pupil['Pupil']['id'])); ?>
+			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $pupil['Pupil']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'élève %s ?\nCette opération ne peut pas être annulée.', true), $pupil['Pupil']['prenom'].' '.$pupil['Pupil']['nom'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

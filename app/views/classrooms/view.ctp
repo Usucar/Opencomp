@@ -39,12 +39,10 @@
         <h3><?php __('Eleves appartenant à cette classe');?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
-		<th><?php __('Id'); ?></th>
 		<th><?php __('Nom'); ?></th>
-		<th><?php __('Prenom'); ?></th>
+		<th><?php __('Prénom','Prenom'); ?></th>
 		<th><?php __('Sexe'); ?></th>
-		<th><?php __('Date-de-naissance'); ?></th>
-		<th><?php __('Classroom Id'); ?></th>
+		<th><?php __('Date de naissance','Date-de-naissance'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -56,12 +54,10 @@
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td><?php echo $pupil['id'];?></td>
 			<td><?php echo $pupil['nom'];?></td>
 			<td><?php echo $pupil['prenom'];?></td>
 			<td><?php echo $pupil['sexe'];?></td>
 			<td><?php echo $pupil['date-de-naissance'];?></td>
-			<td><?php echo $pupil['classroom_id'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('Voir', true), array('controller' => 'pupils', 'action' => 'view', $pupil['id'])); ?>
 				<?php echo $this->Html->link(__('Editer', true), array('controller' => 'pupils', 'action' => 'edit', $pupil['id'])); ?>
