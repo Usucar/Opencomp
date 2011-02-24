@@ -8,12 +8,21 @@
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-		//echo $this->Html->css('cake.generic');
                 echo $this->Html->css('opencomp.generic');
-				echo $this->Html->css('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
-                  
-		echo $scripts_for_layout;
+                echo $this->Html->css('jquery-ui-1.8.10.custom');
+		echo $this->Html->css('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
+                
+                echo $javascript->link('jquery');
+                echo $javascript->link('jquery-ui');
 	?>
+    <script type="text/javascript">
+    $(function() {
+    $(".sortable").sortable({
+        placeholder: "fond",
+    })
+    $(".sortable").disableSelection();
+});
+    </script>
 </head>
 <body>
     
@@ -67,6 +76,7 @@
 
     </div>
     
-	<?php echo $this->element('sql_dump'); ?>
+	<?php echo $this->element('sql_dump'); 
+              echo $this->Js->writeBuffer();   ?>
 </body>
 </html>
