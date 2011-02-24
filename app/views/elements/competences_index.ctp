@@ -27,9 +27,9 @@ $id = $data['Competence']['id'];
 
 //debug($items);
 
-echo '<ul>';
 if (isset ($items[$id]))
 {
+    echo '<ul class="sortable">';
     foreach ($items[$id] as $competence => $type)
     {
         switch ($type)
@@ -50,6 +50,7 @@ if (isset ($items[$id]))
             echo '<li>'.$competence.'</li>';
         }
     }
+    echo '</ul>';
 }
-echo '</ul>'
+
 ?>
