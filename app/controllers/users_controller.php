@@ -72,16 +72,16 @@ class UsersController extends AppController{
             }
             else
             {
-				//Petite attention, on distingue la modification de l'ajout même
-				//si une seule méthode effectue les deux opérations.
-				if (!empty($this->data['User']['id']))
-				{
-					$this->set('title_for_layout', 'Modifier un utilisateur');
-				}
-				else
-				{
-					$this->set('title_for_layout', 'Ajouter un utilisateur');
-				}
+                //Petite attention, on distingue la modification de l'ajout même
+                //si une seule méthode effectue les deux opérations.
+                if (!empty($this->data['User']['id']))
+                {
+                        $this->set('title_for_layout', 'Modifier un utilisateur');
+                }
+                else
+                {
+                        $this->set('title_for_layout', 'Ajouter un utilisateur');
+                }
 				
                 $this->Session->setFlash('Corrigez les erreurs mentionnées', 'message_attention');
             }
