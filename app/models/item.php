@@ -11,13 +11,13 @@ class Item extends AppModel {
                     'rule' => array('notEmpty'),
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'Selectionnez la competence a laquelle se rattache cet Item'
+                    'message' => 'Séléctionnez la compétence à laquelle se rattache cet item'
                 ),
                 'intitule' => array(
                     'rule' => array('notEmpty'),
                     'required' => true,
                     'allowEmpty' => false,
-                    'message' => 'Vous devez completer ce champ !'
+                    'message' => 'Vous devez compléter ce champ !'
                 )
     );
 

@@ -25,32 +25,34 @@ $id = $data['Competence']['id'];
  * tableau imbriqués.
  */
 
-//debug($items);
-
-if (isset ($items[$id]))
+if (isset ($itemsType[$id]))
 {
+    echo '<div class="maj"></div>';
     echo '<ul class="sortable">';
-    foreach ($items[$id] as $competence => $type)
+    foreach ($itemsType[$id] as $competence => $type)
     {
         switch ($type)
         {
             case 1:
-            echo '<li>'.$competence.' (Instructions officielles)</li>';
+            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' (Instructions officielles)</li>';
             break;
 
             case 2:
-            echo '<li>'.$competence.' (Compétence établissement)</li>';
+            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' (Compétence établissement)</li>';
             break;
 
             case 3:
-            echo '<li>'.$competence.' (Compétence enseignant)</li>';
+            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' (Compétence enseignant)</li>';
             break;
 
             default:
-            echo '<li>'.$competence.'</li>';
+            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.'</li>';
         }
     }
     echo '</ul>';
+    echo '<form action="" method="post">'; 
+    echo '<input type="hidden" name="sortable" />';
+    echo '</form>';
 }
 
 ?>

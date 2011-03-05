@@ -118,7 +118,7 @@ class UsersController extends AppController{
         // page de login et on le redirige vers un module au choix !
         $user = $this->Auth->user();
         if (isset($user))
-        $this->redirect(array('controller'=>'users', 'action'=>'index'));
+        $this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
     }
 
     function logout()

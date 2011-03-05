@@ -17,11 +17,17 @@ class CompetencesController extends AppController
 
 		$this->set(compact('categories'));
 
-                $i = $this->Competence->Item->find('list', array(
+                $sql1 = $this->Competence->Item->find('list', array(
                     'fields' => array('intitule', 'type', 'competence_id'),
                     'order' => array('Item.competence_id','Item.place')
                 ));
-                $this->set('items',$i);
+                $this->set('itemsType',$sql1);
+                
+                $sql2 = $this->Competence->Item->find('list', array(
+                    'fields' => array('intitule', 'id', 'competence_id'),
+                    'order' => array('Item.competence_id','Item.place')
+                ));
+                $this->set('itemsPlace',$sql2);
 	}
 
 	/**

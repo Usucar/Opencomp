@@ -7,17 +7,16 @@
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-
                 echo $this->Html->css('opencomp.generic');
-
+		echo $this->Html->css('cake.auth');
 		echo $scripts_for_layout;
 	?>
 </head>
 <body>
 	<div id="container">
 			<div id="content">
+                            
+                            <div id="logo"><h1>Opencomp</h1></div>
 
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->Session->flash('auth'); ?>

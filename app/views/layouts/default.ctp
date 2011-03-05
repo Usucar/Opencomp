@@ -19,13 +19,17 @@
     $(function() {
     $(".sortable").sortable({
         placeholder: "fond",
+        update : function(){
+            var order = $(".sortable").sortable("serialize");
+            $(".maj").load("ajax.php?",order);
+        }
     })
     $(".sortable").disableSelection();
+
 });
     </script>
 </head>
 <body>
-    
     <div id="wrap">
                 
         <div id="en_tete">                
