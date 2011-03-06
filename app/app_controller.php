@@ -3,7 +3,7 @@
 class AppController extends Controller {
         
         var $helpers = array('Session', 'Ajax', 'Html', 'Js' => 'Jquery');
-	var $components = array ('Auth','Session');
+	var $components = array ('Auth','Session','DebugKit.Toolbar');
         
 
 	function beforeFilter(){
