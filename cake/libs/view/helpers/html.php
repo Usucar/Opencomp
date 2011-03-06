@@ -431,7 +431,7 @@ class HtmlHelper extends AppHelper {
 			if ($url[0] !== '/') {
 				$url = JS_URL . $url;
 			}
-			if (strpos($url, '?') === false && strpos($url, '.js') === false) {
+			if (strpos($url, '?') === false && substr($url, -3) !== '.js') {
 				$url .= '.js';
 			}
 			$url = $this->assetTimestamp($this->webroot($url));
@@ -527,7 +527,7 @@ class HtmlHelper extends AppHelper {
  *
  * {{{
  * echo $html->style(array('margin' => '10px', 'padding' => '10px'), true);
- * 
+ *
  * // creates
  * 'margin:10px;padding:10px;'
  * }}}
@@ -806,7 +806,7 @@ class HtmlHelper extends AppHelper {
 /**
  * Internal function to build a nested list (UL/OL) out of an associative array.
  *
- * @param array $list Set of elements to list
+ * @param array $items Set of elements to list
  * @param array $options Additional HTML attributes of the list (ol/ul) tag
  * @param array $itemOptions Additional HTML attributes of the list item (LI) tag
  * @param string $tag Type of list tag to use (ol/ul)
