@@ -21,7 +21,7 @@ if (Configure::read() == 0):
 endif;
 ?>
 <h2><?php echo sprintf(__('Notes de version de CakePHP %s.', true), Configure::version()); ?></h2>
-<a href="http://cakephp.lighthouseapp.com/projects/42648/changelog-1-3-3"><?php __('Lire les notes de version'); ?> </a>
+<a href="http://cakephp.org/changelogs/1.3.7"><?php __('Lire les notes de version'); ?> </a>
 <?php
 if (Configure::read() > 0):
 	Debugger::checkSecurityKeys();

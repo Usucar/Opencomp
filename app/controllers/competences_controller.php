@@ -37,8 +37,16 @@ class CompetencesController extends AppController
 	 */
 	function edit($id = null)
 	{
-                $this->set('title_for_layout', 'Ajout d\'une catégorie au référentiel de compétences');
+                $title = __('Ajouter',true);
 
+                if(!empty($this->data['Category']['id'])) {
+                        $title = __('Modifier',true);
+                };
+
+                $title .= ' '.__('une catégorie au référentiel de compétences',true);
+
+                $this->set('title_for_layout', $title);
+                
 		if(isset($this->data))
 		{
 			$this->Competence->set($this->data);

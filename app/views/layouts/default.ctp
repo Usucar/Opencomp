@@ -34,7 +34,7 @@
                 
         <div id="en_tete">                
 
-                <?php echo $html->image('logo.png', array('alt' => 'Opencomp', 'class' => 'logo_entete'))?>
+                <?php echo $html->image('logo.png', array('alt' => 'Opencomp logo', 'class' => 'logo_entete'))?>
 
                 <div class="titre_entete">Opencomp</div>
                 <div class="description_entete">Gestion de r&eacute;sultats scolaires par navigateur<span class ="description_entete" style="font-size:x-small">et bien plus encore !</span></div>

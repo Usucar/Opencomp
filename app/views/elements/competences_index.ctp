@@ -4,17 +4,17 @@ $id = $data['Competence']['id'];
 ?>
 <?php e($data['Competence']['libelle']); ?> 
 <?php e($html->image('up.png', array(
-            'alt' => 'Monter',
+            'alt' => __('Monter',true),
             'url' => array('action' => 'move_up',$id)))); ?>&nbsp;
 <?php e($html->image('down.png', array(
-            'alt' => 'Descendre',
+            'alt' => __('Descendre',true),
             'url' => array('action' => 'move_down',$id)))); ?>&nbsp;
 <?php e($html->image('edit.png', array(
-            'alt' => 'Modifier',
+            'alt' => __('Modifier',true),
             'url' => array('action' => 'edit',$id)))); ?>&nbsp;
 <?php e($html->image('delete.png', array(
             'onclick' => 'return confirm(\'Voulez vous vraiment supprimer cette catégorie de compétence ?\');',
-            'alt' => 'Supprimer',
+            'alt' => __('Supprimer',true),
             'url' => array('action' => 'delete',$id)))); ?>&nbsp;
 <br />
 <?php
@@ -34,15 +34,15 @@ if (isset ($itemsType[$id]))
         switch ($type)
         {
             case 1:
-            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' (Instructions officielles)</li>';
+            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' '.__('Instructions officielles',true).'</li>';
             break;
 
             case 2:
-            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' (Compétence établissement)</li>';
+            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' '.__('Item établissement',true).'</li>';
             break;
 
             case 3:
-            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' (Compétence enseignant)</li>';
+            echo '<li id ="item_'.$itemsPlace[$id][$competence].'">'.$competence.' '.__('Item enseignant',true).'</li>';
             break;
 
             default:

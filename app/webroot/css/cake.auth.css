@@ -11,6 +11,11 @@ body {
         background-color: #F9F9F9;
 }
 
+#authMessage
+{
+    margin-bottom: 10px;
+}
+
 h1 {
 	font-weight: normal;
 	margin-bottom:0.5em;
@@ -43,7 +48,7 @@ h1 {
         background: #fff;
 	clear: both;
 	color: #333;
-	padding: 10px 20px 40px 20px;
+	padding: 10px 20px 20px 20px;
 	overflow: auto;
         box-shadow: 1px 1px 12px #555; 
         -moz-box-shadow: 1px 1px 12px #555; 
@@ -78,6 +83,11 @@ input{
         padding: 2px;
 	width:98%;
         color: #555555;
+}
+
+.input
+{
+    margin-bottom:10px;
 }
 
 form .submit input[type=submit] {

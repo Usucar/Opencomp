@@ -7,10 +7,10 @@ echo $form->create('User',array(
     )
 );
 
-echo $form->input('User.prenom', array('label'=>'Prénom'));
-echo $form->input('User.nom', array('label'=>'Nom'));
-echo $form->input('User.email', array('label'=>'Adresse de courriel'));
-echo $form->input('User.username', array('label'=>'Nom d\'utilisateur'));
+echo $form->input('User.prenom', array('label'=>__('Prénom',true)));
+echo $form->input('User.nom', array('label'=>__('Nom',true)));
+echo $form->input('User.email', array('label'=>__('Adresse de courriel',true)));
+echo $form->input('User.username', array('label'=>__('Nom d\'utilisateur',true)));
 
 ?>
 
@@ -22,20 +22,20 @@ echo $form->input('User.username', array('label'=>'Nom d\'utilisateur'));
         //on indique la marche à suivre pour ne pas modifier le mot de passe.
         if (!empty($this->data['User']['id']))
         {
-            echo $html->div('info-message', 'Pour conserver le mot de passe actuel, laissez les champs blancs');
+            echo $html->div('info-message', __('Pour conserver le mot de passe actuel, laissez les champs blancs',true));
         }
     ?>
 </div>
 
 <?php
 
-echo $form->input('User.passwrd2', array('label'=>'Confirmez le mot de passe', 'type'=>'password'));
+echo $form->input('User.passwrd2', array('label'=>__('Confirmez le mot de passe',true), 'type'=>'password'));
 echo $form->hidden('User.id');
 
-$options=array('enseignant'=>'Enseignant','admin'=>'Administrateur');
-echo $form->input('User.role', array('label'=>'Statut', 'options'=>$options));
+$options=array('enseignant'=>__('Enseignant',true),'admin'=>__('Administrateur',true));
+echo $form->input('User.role', array('label'=>__('Statut',true), 'options'=>$options));
 
 
-echo $form->end('Envoyer');
+echo $form->end(__('Envoyer',true));
 
 ?>

@@ -1,26 +1,18 @@
 <?php
 
-$this->pageTitle = "Ajouter";
-
-if(!empty($this->data['Category']['id'])) {
-	$this->pageTitle = "Modifier";
-};
-
-$this->pageTitle .= " une catégorie";
-
 e($form->create('Competence', array('action' => 'edit')));
 e($form->input('id'));
 ?>
 
 <fieldset>
-	<legend><?php e($this->pageTitle); ?></legend>
+	<legend><?php e($title_for_layout); ?></legend>
 
 	<?php
-	e($form->input('parent_id', array('label' => "Parent :", 'empty' => "Racine")));
-	e($form->input('libelle', array('label' => "Nom de la catégorie :", 'maxLength' => '')));
+	e($form->input('parent_id', array('label' => __('Catégorie parente',true), 'empty' => __('Racine',true))));
+	e($form->input('libelle', array('label' => __('Nom de la catégorie',true), 'maxLength' => '')));
 	?>
 </fieldset>
 
-<?php e($form->end('Valider')); ?>
+<?php e($form->end(__('Valider',true))); ?>
 
-<p><?php e($html->link("Liste des catégories", 'index')); ?></p>
+<p><?php e($html->link(__('Afficher la liste des catégories',true), 'index')); ?></p>
